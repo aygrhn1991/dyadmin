@@ -10,11 +10,12 @@ import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 
-import {  CKEditorModule  } from 'ng2-ckeditor';
+import { CKEditorModule } from 'ng2-ckeditor';
 
 import { LoginComponent } from './components/login/login.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { QuestionsComponent } from './components/layout/questions/questions.component';
+import { ArticlesComponent } from './components/layout/articles/articles.component';
 
 registerLocaleData(zh);
 
@@ -23,7 +24,8 @@ registerLocaleData(zh);
     AppComponent,
     LoginComponent,
     LayoutComponent,
-    QuestionsComponent
+    QuestionsComponent,
+    ArticlesComponent
   ],
   imports: [
     BrowserModule,
