@@ -39,5 +39,6 @@ export class QuestionsComponent implements OnInit {
   }
   show():void{
     console.log(this.mycontent);
+    console.log(1);
   }
 }
