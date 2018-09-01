@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { QuestionsComponent } from './components/layout/questions/questions.component';
 import { ArticlesComponent } from './components/layout/articles/articles.component';
+import { TypesComponent } from './components/layout/types/types.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -12,6 +13,7 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: '', redirectTo: 'questions', pathMatch: 'full' },
+      { path: 'types', component: TypesComponent },
       { path: 'questions', component: QuestionsComponent },
       { path: 'articles', component: ArticlesComponent }
     ]

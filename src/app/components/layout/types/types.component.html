@@ -1,0 +1,42 @@
+<nz-table #typeTable nzShowSizeChanger nzSize="small" nzFrontPagination="false" [nzData]="dataSet" [nzLoading]="loading"
+  [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" (nzPageIndexChange)="searchData()" (nzPageSizeChange)="searchData(true)">
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>科室名称</th>
+      <th>
+        <button nz-button nzSize="small" nzType="primary" (click)="showModal_add(data)">新增</button>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of typeTable.data">
+      <td>{{data.t_id}}</td>
+      <td>{{data.t_type_name}}</td>
+      <td>
+        <button nz-button nzSize="small" nzType="primary" (click)="showModal_edit(data)">修改</button>
+        <button nz-button nzSize="small" nzType="danger" (click)="delete(data)">删除</button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+<nz-modal [(nzVisible)]="isVisible_add" nzTitle="科室添加" (nzOnCancel)="isVisible_add=false" (nzOnOk)="handleOk_add()">
+  <form nz-form>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6">科室名称</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input [(ngModel)]="data_add.t_type_name" name="data_add.t_type_name">
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>
+<nz-modal [(nzVisible)]="isVisible_edit" nzTitle="科室修改" (nzOnCancel)="isVisible_edit=false" (nzOnOk)="handleOk_edit()">
+  <form nz-form>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6">科室名称</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input [(ngModel)]="data_edit.t_type_name" name="data_edit.t_type_name">
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>

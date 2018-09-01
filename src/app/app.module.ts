@@ -14,6 +14,7 @@ import { CKEditorModule } from 'ng2-ckeditor';
 
 import { LoginComponent } from './components/login/login.component';
 import { LayoutComponent } from './components/layout/layout.component';
+import { TypesComponent } from './components/layout/types/types.component';
 import { QuestionsComponent } from './components/layout/questions/questions.component';
 import { ArticlesComponent } from './components/layout/articles/articles.component';
 
@@ -24,6 +25,7 @@ registerLocaleData(zh);
     AppComponent,
     LoginComponent,
     LayoutComponent,
+    TypesComponent,
     QuestionsComponent,
     ArticlesComponent
   ],
