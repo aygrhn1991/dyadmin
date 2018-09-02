@@ -1,0 +1,28 @@
+<form nz-form>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6">科室</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <app-typecomp #typeComp></app-typecomp>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6">标题</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input [(ngModel)]="data_model.t_type_name" name="data_model.t_type_name">
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6">作者</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input [(ngModel)]="data_model.t_type_name" name="data_model.t_type_name">
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6">日期</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <app-datecomp #dateComp></app-datecomp>
+      </nz-form-control>
+    </nz-form-item>    
+  </form>
+  <ckeditor [(ngModel)]="content" #ckeditor [config]="ckeConfig" (change)="onChange($event)"></ckeditor>
+  <button (click)="save()">231</button>

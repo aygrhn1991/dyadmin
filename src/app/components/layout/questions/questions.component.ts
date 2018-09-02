@@ -7,10 +7,8 @@ import { Component, OnInit ,ViewChild } from '@angular/core';
 })
 export class QuestionsComponent implements OnInit {
 
-  name = 'ng2-ckeditor';
   ckeConfig: any;
   mycontent: string;
-  log: string = '';
   @ViewChild("myckeditor") ckeditor: any;
 
   constructor() {
