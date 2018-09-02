@@ -1,28 +1,46 @@
 <form nz-form>
-    <nz-form-item>
-      <nz-form-label [nzSpan]="6">科室</nz-form-label>
-      <nz-form-control [nzSpan]="14">
-        <app-typecomp #typeComp></app-typecomp>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSpan]="6">标题</nz-form-label>
-      <nz-form-control [nzSpan]="14">
-        <input nz-input [(ngModel)]="data_model.t_type_name" name="data_model.t_type_name">
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSpan]="6">作者</nz-form-label>
-      <nz-form-control [nzSpan]="14">
-        <input nz-input [(ngModel)]="data_model.t_type_name" name="data_model.t_type_name">
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSpan]="6">日期</nz-form-label>
-      <nz-form-control [nzSpan]="14">
-        <app-datecomp #dateComp></app-datecomp>
-      </nz-form-control>
-    </nz-form-item>    
-  </form>
-  <ckeditor [(ngModel)]="content" #ckeditor [config]="ckeConfig" (change)="onChange($event)"></ckeditor>
-  <button (click)="save()">231</button>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4">科室</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <app-typecomp #typeComp></app-typecomp>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4">标题</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <input nz-input [(ngModel)]="data_model.t_type_name" name="data_model.t_type_name">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4">作者</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <input nz-input [(ngModel)]="data_model.t_type_name" name="data_model.t_type_name">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4">日期</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <app-datecomp #dateComp></app-datecomp>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4">封面图</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <nz-upload class="avatar-uploader"
+      nzAction="http://localhost:8080/admin/queryalltypes"
+      nzName="avatar"
+      nzListType="picture-card"
+      [nzShowUploadList]="false"
+      [nzBeforeUpload]="beforeUpload"
+      (nzChange)="handleChange($event)">
+      <ng-container *ngIf="!avatarUrl">
+        <i class="anticon anticon-plus"></i>
+        <div class="ant-upload-text">Upload</div>
+      </ng-container>
+      <img *ngIf="avatarUrl" [src]="avatarUrl" class="avatar">
+    </nz-upload>    
+    </nz-form-control>
+  </nz-form-item>
+</form>
+<ckeditor [(ngModel)]="content" #ckeditor [config]="ckeConfig" (change)="onChange($event)"></ckeditor>
+<button (click)="save()">231</button>
