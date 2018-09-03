@@ -1,0 +1,13 @@
+.dy-dialogue{
+    background-color: beige;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+    display: inline-block;
+}
+.dy-dialogue-right{
+    float: right;
+}
+.dy-dialogue-left{
+    float: left;
+}

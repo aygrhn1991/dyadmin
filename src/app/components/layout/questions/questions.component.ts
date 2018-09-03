@@ -121,4 +121,13 @@ export class QuestionsComponent implements OnInit {
       }
     });
   }
+
+  
+  isVisible_answer = true;
+  showModal_answer(): void {
+    this.isVisible_answer = true;
+  }
+  handleOk_answer():void{
+
+  }
 }
