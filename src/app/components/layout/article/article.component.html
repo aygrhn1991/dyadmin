@@ -26,19 +26,14 @@
   <nz-form-item>
     <nz-form-label [nzSpan]="4">封面图</nz-form-label>
     <nz-form-control [nzSpan]="10">
-      <nz-upload class="avatar-uploader"
-      nzAction="http://localhost:8080/admin/queryalltypes"
-      nzName="avatar"
-      nzListType="picture-card"
-      [nzShowUploadList]="false"
-      [nzBeforeUpload]="beforeUpload"
-      (nzChange)="handleChange($event)">
-      <ng-container *ngIf="!avatarUrl">
-        <i class="anticon anticon-plus"></i>
-        <div class="ant-upload-text">Upload</div>
-      </ng-container>
-      <img *ngIf="avatarUrl" [src]="avatarUrl" class="avatar">
-    </nz-upload>    
+      <nz-upload class="avatar-uploader" nzAction="http://localhost:8088/admin/articleUpload" nzName="img" nzListType="picture-card"
+        [nzShowUploadList]="false" [nzBeforeUpload]="beforeUpload" (nzChange)="handleChange($event)">
+        <ng-container *ngIf="!imgUrl">
+          <i class="anticon anticon-plus"></i>
+          <div class="ant-upload-text">上传图片</div>
+        </ng-container>
+        <img *ngIf="imgUrl" [src]="imgUrl">
+      </nz-upload>
     </nz-form-control>
   </nz-form-item>
 </form>

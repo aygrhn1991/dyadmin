@@ -15,7 +15,7 @@ export class ArticleComponent implements OnInit {
 
   content;
   ckeConfig;
-  data_model={};
+  data_model = {};
   @ViewChild('typeComp') typeComp: TypecompComponent;
   @ViewChild('dateComp') dateComp: DatecompComponent;
 
@@ -33,21 +33,15 @@ export class ArticleComponent implements OnInit {
   }
 
   beforeUpload = (file: File) => {
-    const isJPG = file.type === 'image/jpeg';
-    if (!isJPG) {
+    const isJPGorPNG = ((file.type === 'image/jpeg') || (file.type === 'image/png'));
+    if (!isJPGorPNG) {
       this.msg.error('You can only upload JPG file!');
     }
     const isLt2M = file.size / 1024 / 1024 < 2;
     if (!isLt2M) {
       this.msg.error('Image must smaller than 2MB!');
     }
-    return isJPG && isLt2M;
-  }
-
-  private getBase64(img: File, callback: (img: {}) => void): void {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result));
-    reader.readAsDataURL(img);
+    return isJPGorPNG && isLt2M;
   }
 
   handleChange(info: { file: UploadFile }): void {
@@ -56,12 +50,9 @@ export class ArticleComponent implements OnInit {
       return;
     }
     if (info.file.status === 'done') {
+
       console.log(info.file.response);
       // Get this url from response in real world.
-      // this.getBase64(info.file.originFileObj, (img: string) => {
-      //   this.loading = false;
-      //   this.avatarUrl = img;
-      // });
     }
   }
 }
