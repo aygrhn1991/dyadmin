@@ -21,7 +21,7 @@ export class ArticleComponent implements OnInit {
     t_content: null
   };
   imgUrl: string;
-  ckeConfig;
+  ckeConfig: any;
 
   @ViewChild('typeComp') typeComp: TypecompComponent;
   @ViewChild('dateComp') dateComp: DatecompComponent;
@@ -38,6 +38,10 @@ export class ArticleComponent implements OnInit {
         this.imgUrl = 'http://localhost:8000/article/' + this.data_model.t_cover;
       });
     }
+    this.ckeConfig = {
+      image_previewText: ' ',
+      filebrowserImageUploadUrl: 'http://localhost:8088/admin/articleContentUpload',
+    };
   }
 
   save(): void {

@@ -58,7 +58,6 @@ export class TypesComponent implements OnInit {
     });
   }
   handleOk_edit(): void {
-    console.log(this.data_edit);
     this.http.post('/admin/edittype', this.data_edit).subscribe((data: any) => {
       if (data == true) {
         this.message.create('success', '操作成功');

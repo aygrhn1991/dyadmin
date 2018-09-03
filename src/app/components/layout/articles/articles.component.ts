@@ -15,10 +15,6 @@ export class ArticlesComponent implements OnInit {
   total = 1;
   dataSet = [];
   loading = true;
-  isVisible_add = false;
-  isVisible_edit = false;
-  data_add: any = {};
-  data_edit: any = {};
 
 
   constructor(private http: HttpserviceService, private message: NzMessageService, private modalService: NzModalService) {
@@ -40,40 +36,10 @@ export class ArticlesComponent implements OnInit {
       this.dataSet = data;
     });
   }
-  showModal_add(): void {
-    this.isVisible_add = true;
-  }
-  showModal_edit(e): void {
-    this.isVisible_edit = true;
-    this.data_edit = e;
-  }
-  handleOk_add(): void {
-    this.http.post('/admin/addarticle', this.data_add).subscribe((data: any) => {
-      if (data == true) {
-        this.message.create('success', '操作成功');
-        this.isVisible_add = false;
-        this.searchData(true);
-      } else {
-        this.message.create('error', '操作失败');
-      }
-    });
-  }
-  handleOk_edit(): void {
-    console.log(this.data_edit);
-    this.http.post('/admin/editarticle', this.data_edit).subscribe((data: any) => {
-      if (data == true) {
-        this.message.create('success', '操作成功');
-        this.isVisible_edit = false;
-        this.searchData(true);
-      } else {
-        this.message.create('error', '操作失败');
-      }
-    });
-  }
   delete(e): void {
     this.modalService.confirm({
       nzTitle: '提示',
-      nzContent: '确定删除 ' + e.t_type_name + ' ?',
+      nzContent: '确定删除 ' + e.t_title + ' ?',
       nzOnOk: () => {
         this.http.get('/admin/deletearticle/' + e.t_id).subscribe((data: any) => {
           if (data == true) {
@@ -86,9 +52,37 @@ export class ArticlesComponent implements OnInit {
       }
     });
   }
-setTop():void{
-  
-}
+  setTop(data): void {
+    data.t_top = data.t_top == 1 ? 0 : 1;
+    this.http.get('/admin/setarticletop/' + data.t_id + '/' + data.t_top).subscribe((data: any) => {
+      if (data == true) {
+        this.message.create('success', '操作成功');
+        this.searchData(true);
+      } else {
+        this.message.create('error', '操作失败');
+      }
+    });
+  }
+  setSort(data): void {
+    this.http.get('/admin/setarticlesort/' + data.t_id + '/' + data.t_sort).subscribe((data: any) => {
+      if (data == true) {
+        this.message.create('success', '操作成功');
+        this.searchData(true);
+      } else {
+        this.message.create('error', '操作失败');
+      }
+    });
+  }
+  setScan(data): void {
+    this.http.get('/admin/setarticlescan/' + data.t_id + '/' + data.t_scan).subscribe((data: any) => {
+      if (data == true) {
+        this.message.create('success', '操作成功');
+        this.searchData(true);
+      } else {
+        this.message.create('error', '操作失败');
+      }
+    });
+  }
 
-  
+
 }

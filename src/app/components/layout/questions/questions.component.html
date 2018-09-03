@@ -1,3 +1,86 @@
-<ckeditor [(ngModel)]="mycontent" #myckeditor [config]="ckeConfig" debounce="500" (change)="onChange($event)"></ckeditor>
-
-<button (click)="show()">12</button>
+<nz-table #typeTable nzShowSizeChanger nzSize="small" nzFrontPagination="false" [nzData]="dataSet" [nzLoading]="loading"
+  [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" (nzPageIndexChange)="searchData()" (nzPageSizeChange)="searchData(true)"
+  [nzShowTotal]="rangeTemplate">
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>科室</th>
+      <th>问题</th>
+      <th>提问人</th>
+      <th>时间</th>
+      <th>浏览次数</th>
+      <th>排序</th>
+      <th>置顶</th>
+      <th>状态</th>
+      <th>
+        <button nz-button nzSize="small" nzType="primary" (click)="showModal_add()">新增</button>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of typeTable.data">
+      <td>{{data.t_id}}</td>
+      <td>{{data.t_type_name}}</td>
+      <td>{{data.t_title}}</td>
+      <td>
+        <nz-tag [nzColor]="'gold'" [hidden]="data.t_user_id!=null">管理员</nz-tag>
+        <span [hidden]="data.t_user_id==null">{{data.t_name}}</span>
+      </td>
+      <td>{{data.t_time|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+      <td>
+        <input nz-input nzSize="small" [(ngModel)]="data.t_scan" style="width: 50px;">
+        <a (click)="setScan(data)">保存</a>
+      </td>
+      <td>
+        <input nz-input nzSize="small" [(ngModel)]="data.t_sort" style="width: 50px;">
+        <a (click)="setSort(data)">保存</a>
+      </td>
+      <td>
+        <nz-switch [ngModel]="data.t_top" nzCheckedChildren="已开启" nzUnCheckedChildren="已关闭" (click)="setTop(data)"></nz-switch>
+      </td>
+      <td>
+        <nz-tag [nzColor]="'red'" [hidden]="data.t_solved">待回复</nz-tag>
+        <nz-tag [nzColor]="'green'" [hidden]="!data.t_solved">已回复</nz-tag>
+      </td>
+      <td>
+        <button nz-button nzSize="small" nzType="primary" (click)="showModal_edit(data)">修改</button>
+        <button nz-button nzSize="small" nzType="danger" (click)="delete(data)">删除</button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+<ng-template #rangeTemplate let-range="range" let-total>
+  第{{range[0]}}-{{range[1]}}条 共{{total}}条
+</ng-template>
+<nz-modal [(nzVisible)]="isVisible_add" nzTitle="问题添加" (nzOnCancel)="isVisible_add=false" (nzOnOk)="handleOk_add()">
+  <form nz-form>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6">科室</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <app-typecomp #typeComp_Add></app-typecomp>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6">问题</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input [(ngModel)]="data_add.t_title" name="data_add.t_title">
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>
+<nz-modal [(nzVisible)]="isVisible_edit" nzTitle="科室修改" (nzOnCancel)="isVisible_edit=false" (nzOnOk)="handleOk_edit()">
+  <form nz-form>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6">科室</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <app-typecomp #typeComp_Edit></app-typecomp>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6">问题</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input [(ngModel)]="data_edit.t_title" name="data_edit.t_title">
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>

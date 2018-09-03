@@ -4,11 +4,11 @@
   <thead>
     <tr>
       <th>id</th>
+      <th>封面图</th>
       <th>科室</th>
       <th>标题</th>
       <th>作者</th>
       <th>时间</th>
-      <th>封面图</th>
       <th>浏览次数</th>
       <th>排序</th>
       <th>置顶</th>
@@ -20,14 +20,22 @@
   <tbody>
     <tr *ngFor="let data of typeTable.data">
       <td>{{data.t_id}}</td>
+      <td>
+        <img src="http://localhost:8000/article/{{data.t_cover}}" style="width:100px;height:60px;" />
+      </td>
       <td>{{data.t_type_name}}</td>
       <td>{{data.t_title}}</td>
       <td>{{data.t_author}}</td>
       <td>{{data.t_time|date:'yyyy-MM-dd HH:mm:ss'}}</td>
-      <td>{{data.t_cover}}</td>
-      <td>{{data.t_scan}}</td>
-      <td>{{data.t_sort}}</td>
-      <td>{{data.t_top}}
+      <td>
+        <input nz-input nzSize="small" [(ngModel)]="data.t_scan" style="width: 50px;">
+        <a (click)="setScan(data)">保存</a>
+      </td>
+      <td>
+        <input nz-input nzSize="small" [(ngModel)]="data.t_sort" style="width: 50px;">
+        <a (click)="setSort(data)">保存</a>
+      </td>
+      <td>
         <nz-switch [ngModel]="data.t_top" nzCheckedChildren="已开启" nzUnCheckedChildren="已关闭" (click)="setTop(data)"></nz-switch>
       </td>
       <td>
@@ -40,23 +48,3 @@
 <ng-template #rangeTemplate let-range="range" let-total>
   第{{range[0]}}-{{range[1]}}条 共{{total}}条
 </ng-template>
-<nz-modal [(nzVisible)]="isVisible_add" nzTitle="科室添加" (nzOnCancel)="isVisible_add=false" (nzOnOk)="handleOk_add()">
-  <form nz-form>
-    <nz-form-item>
-      <nz-form-label [nzSpan]="6">科室名称</nz-form-label>
-      <nz-form-control [nzSpan]="14">
-        <input nz-input [(ngModel)]="data_add.t_type_name" name="data_add.t_type_name">
-      </nz-form-control>
-    </nz-form-item>
-  </form>
-</nz-modal>
-<nz-modal [(nzVisible)]="isVisible_edit" nzTitle="科室修改" (nzOnCancel)="isVisible_edit=false" (nzOnOk)="handleOk_edit()">
-  <form nz-form>
-    <nz-form-item>
-      <nz-form-label [nzSpan]="6">科室名称</nz-form-label>
-      <nz-form-control [nzSpan]="14">
-        <input nz-input [(ngModel)]="data_edit.t_type_name" name="data_edit.t_type_name">
-      </nz-form-control>
-    </nz-form-item>
-  </form>
-</nz-modal>

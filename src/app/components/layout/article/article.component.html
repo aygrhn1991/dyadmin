@@ -26,7 +26,7 @@
   <nz-form-item>
     <nz-form-label [nzSpan]="4">封面图</nz-form-label>
     <nz-form-control [nzSpan]="10">
-      <nz-upload class="avatar-uploader" nzAction="http://localhost:8088/admin/articleUpload" nzName="img" nzListType="picture-card"
+      <nz-upload class="avatar-uploader" nzAction="http://localhost:8088/admin/articleCoverUpload" nzName="img" nzListType="picture-card"
         [nzShowUploadList]="false" [nzBeforeUpload]="beforeUpload" (nzChange)="handleChange($event)">
         <ng-container *ngIf="!imgUrl">
           <i class="anticon anticon-plus"></i>
@@ -38,4 +38,6 @@
   </nz-form-item>
 </form>
 <ckeditor [(ngModel)]="data_model.t_content" #ckeditor [config]="ckeConfig"></ckeditor>
-<button (click)="save()">231</button>
+<div style="text-align: center">
+  <button nz-button nzSize="small" nzType="primary" (click)="save()">保存</button>
+</div>

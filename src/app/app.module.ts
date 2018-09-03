@@ -33,8 +33,8 @@ registerLocaleData(zh);
     ArticlesComponent,
     ArticleComponent,
     TypecompComponent,
-    QuestionsComponent,
-    DatecompComponent
+    DatecompComponent,
+    QuestionsComponent
   ],
   imports: [
     BrowserModule,
