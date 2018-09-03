@@ -16,7 +16,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'questions', pathMatch: 'full' },
       { path: 'types', component: TypesComponent },
       { path: 'articles', component: ArticlesComponent },
-      { path: 'article', component: ArticleComponent },
+      { path: 'article/:id', component: ArticleComponent },
       { path: 'questions', component: QuestionsComponent }
     ]
   },

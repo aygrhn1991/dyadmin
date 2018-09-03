@@ -8,13 +8,13 @@
   <nz-form-item>
     <nz-form-label [nzSpan]="4">标题</nz-form-label>
     <nz-form-control [nzSpan]="10">
-      <input nz-input [(ngModel)]="data_model.t_type_name" name="data_model.t_type_name">
+      <input nz-input [(ngModel)]="data_model.t_title" name="data_model.t_title">
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
     <nz-form-label [nzSpan]="4">作者</nz-form-label>
     <nz-form-control [nzSpan]="10">
-      <input nz-input [(ngModel)]="data_model.t_type_name" name="data_model.t_type_name">
+      <input nz-input [(ngModel)]="data_model.t_author" name="data_model.t_author">
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
@@ -37,5 +37,5 @@
     </nz-form-control>
   </nz-form-item>
 </form>
-<ckeditor [(ngModel)]="content" #ckeditor [config]="ckeConfig" (change)="onChange($event)"></ckeditor>
+<ckeditor [(ngModel)]="data_model.t_content" #ckeditor [config]="ckeConfig"></ckeditor>
 <button (click)="save()">231</button>

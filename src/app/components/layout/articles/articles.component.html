@@ -1,5 +1,6 @@
 <nz-table #typeTable nzShowSizeChanger nzSize="small" nzFrontPagination="false" [nzData]="dataSet" [nzLoading]="loading"
-  [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" (nzPageIndexChange)="searchData()" (nzPageSizeChange)="searchData(true)">
+  [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" (nzPageIndexChange)="searchData()" (nzPageSizeChange)="searchData(true)"
+  [nzShowTotal]="rangeTemplate">
   <thead>
     <tr>
       <th>id</th>
@@ -12,7 +13,7 @@
       <th>排序</th>
       <th>置顶</th>
       <th>
-        <button nz-button nzSize="small" nzType="primary" [routerLink]="['../article']">新增</button>
+        <button nz-button nzSize="small" nzType="primary" [routerLink]="['/layout/article',0]">新增</button>
       </th>
     </tr>
   </thead>
@@ -28,12 +29,15 @@
       <td>{{data.t_sort}}</td>
       <td>{{data.t_top}}</td>
       <td>
-        <button nz-button nzSize="small" nzType="primary" (click)="showModal_edit(data)">修改</button>
+        <button nz-button nzSize="small" nzType="primary" [routerLink]="['/layout/article',data.t_id]">修改</button>
         <button nz-button nzSize="small" nzType="danger" (click)="delete(data)">删除</button>
       </td>
     </tr>
   </tbody>
 </nz-table>
+<ng-template #rangeTemplate let-range="range" let-total>
+  第{{range[0]}}-{{range[1]}}条 共{{total}}条
+</ng-template>
 <nz-modal [(nzVisible)]="isVisible_add" nzTitle="科室添加" (nzOnCancel)="isVisible_add=false" (nzOnOk)="handleOk_add()">
   <form nz-form>
     <nz-form-item>
