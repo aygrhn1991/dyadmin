@@ -27,7 +27,9 @@
       <td>{{data.t_cover}}</td>
       <td>{{data.t_scan}}</td>
       <td>{{data.t_sort}}</td>
-      <td>{{data.t_top}}</td>
+      <td>{{data.t_top}}
+        <nz-switch [ngModel]="data.t_top" nzCheckedChildren="已开启" nzUnCheckedChildren="已关闭" (click)="setTop(data)"></nz-switch>
+      </td>
       <td>
         <button nz-button nzSize="small" nzType="primary" [routerLink]="['/layout/article',data.t_id]">修改</button>
         <button nz-button nzSize="small" nzType="danger" (click)="delete(data)">删除</button>

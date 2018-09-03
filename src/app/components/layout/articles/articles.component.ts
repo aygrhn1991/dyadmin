@@ -86,7 +86,9 @@ export class ArticlesComponent implements OnInit {
       }
     });
   }
-
+setTop():void{
+  
+}
 
   
 }
