@@ -5,7 +5,7 @@
     <tr>
       <th>id</th>
       <th>科室</th>
-      <th>问题</th>
+      <th style="width: 200px;">问题</th>
       <th>提问人</th>
       <th>时间</th>
       <th>浏览次数</th>
@@ -23,8 +23,8 @@
       <td>{{data.t_type_name}}</td>
       <td>{{data.t_title}}</td>
       <td>
-        <nz-tag [nzColor]="'gold'" [hidden]="data.t_user_id!=null">管理员</nz-tag>
-        <span [hidden]="data.t_user_id==null">{{data.t_name}}</span>
+        <nz-tag [nzColor]="'gold'" *ngIf="data.t_user_id==null">管理员</nz-tag>
+        <span *ngIf="data.t_user_id!=null">{{data.w_nickname}}</span>
       </td>
       <td>{{data.t_time|date:'yyyy-MM-dd HH:mm:ss'}}</td>
       <td>
@@ -39,13 +39,14 @@
         <nz-switch [ngModel]="data.t_top" nzCheckedChildren="已开启" nzUnCheckedChildren="已关闭" (click)="setTop(data)"></nz-switch>
       </td>
       <td>
-        <nz-tag [nzColor]="'red'" [hidden]="data.t_solved">待回复</nz-tag>
-        <nz-tag [nzColor]="'green'" [hidden]="!data.t_solved">已回复</nz-tag>
+        <nz-tag [nzColor]="'red'" *ngIf="!data.t_solved">待回复</nz-tag>
+        <nz-tag [nzColor]="'green'" *ngIf="data.t_solved">已回复</nz-tag>
       </td>
       <td>
         <button nz-button nzSize="small" nzType="primary" (click)="showModal_edit(data)">修改</button>
         <button nz-button nzSize="small" nzType="danger" (click)="delete(data)">删除</button>
         <button nz-button nzSize="small" nzType="default" (click)="showModal_answer(data)">查看/回复</button>
+        <button nz-button nzSize="small" nzType="primary" *ngIf="data.t_user_id!=null" (click)="showModal_user(data)">用户信息</button>
       </td>
     </tr>
   </tbody>
@@ -87,37 +88,59 @@
 </nz-modal>
 <nz-modal [(nzVisible)]="isVisible_answer" nzTitle="问题查看/回复" nzOkText="回复" nzCancelText="关闭" (nzOnCancel)="isVisible_answer=false"
   (nzOnOk)="handleOk_answer()">
-  <p style="text-align: center;font-weight: bold;font-size: 20px;">大姨夫来了怎么办？</p>
-  <div nz-row>
-    <div nz-col nzSpan="14" nzOffset="8">
-      <div class="dy-dialogue dy-dialogue-right">多喝热水</div>
+  <p style="font-weight: bold;font-size: 20px;">{{temp_qusetion.t_title}}</p>
+  <div style="height:300px;overflow:auto;padding:10px 0;">
+    <div nz-row *ngFor="let data of answerList">
+      <div nz-col nzSpan="24" style="font-size:10px;color:#ccc;text-align:center;">{{data.t_time|date:'yyyy-MM-dd HH:mm:ss'}}</div>
+      <div nz-col nzSpan="2" *ngIf="data.t_user_id!=null" style="text-align: center;">
+        <i class="anticon anticon-close-circle-o dy-dialogue-delete" style="left:0;" (click)="deleteAnswer(data)"></i>
+        <nz-avatar nzIcon="anticon anticon-user" style="background-color:#fde3cf;"></nz-avatar>
+      </div>
+      <div nz-col nzSpan="14" nzOffset="{{data.t_user_id==null?8:null}}">
+        <div class="{{data.t_user_id==null?'dy-dialogue dy-dialogue-right':'dy-dialogue dy-dialogue-left'}}">{{data.t_content}}
+        </div>
+      </div>
+      <div nz-col nzSpan="2" *ngIf="data.t_user_id==null" style="text-align: center;">
+        <i class="anticon anticon-close-circle-o dy-dialogue-delete" style="right:0;" (click)="deleteAnswer(data)"></i>
+        <nz-avatar nzIcon="anticon anticon-user" style="background-color:#87d068;"></nz-avatar>
+      </div>
     </div>
-    <div nz-col nzSpan="2">
-      <nz-avatar nzIcon="anticon anticon-user" style="background-color:#87d068;"></nz-avatar>
+  </div>
+  <textarea nz-input placeholder="在此输入回复..." [nzAutosize]="{ minRows: 3, maxRows: 6 }" [(ngModel)]="temp_answer.t_content"></textarea>
+</nz-modal>
+<nz-modal [(nzVisible)]="isVisible_user" nzTitle="用户信息" (nzOnCancel)="isVisible_user=false" (nzOnOk)="isVisible_user=false">
+  <div nz-row>
+    <div nz-col nzSpan="8" class="dy-user-label">头像：</div>
+    <div nz-col nzSpan="16" class="dy-user-info">
+      <nz-avatar nzIcon="anticon anticon-user" nzSrc="{{temp_user.w_headimgurl}}"></nz-avatar>
     </div>
   </div>
   <div nz-row>
-    <div nz-col nzSpan="2">
-      <nz-avatar nzIcon="anticon anticon-user" style="background-color:#87d068;"></nz-avatar>
-    </div>
-    <div nz-col nzSpan="14">
-      <div class="dy-dialogue dy-dialogue-left">不管用啊</div>
-    </div>
+    <div nz-col nzSpan="8" class="dy-user-label">昵称：</div>
+    <div nz-col nzSpan="16" class="dy-user-info">{{temp_user.w_nickname}}</div>
   </div>
   <div nz-row>
-    <div nz-col nzSpan="14" nzOffset="8">
-      <div class="dy-dialogue dy-dialogue-right">喝的不够多，没事就喝，使劲喝，总之就是多喝，多喝，多喝！</div>
-    </div>
-    <div nz-col nzSpan="2">
-      <nz-avatar nzIcon="anticon anticon-user" style="background-color:#87d068;"></nz-avatar>
-    </div>
+    <div nz-col nzSpan="8" class="dy-user-label">性别：</div>
+    <div nz-col nzSpan="16" class="dy-user-info">{{temp_user.w_sex=='1'?'男':temp_user.w_sex=='2'?'女':'未知'}}</div>
   </div>
   <div nz-row>
-    <div nz-col nzSpan="2">
-      <nz-avatar nzIcon="anticon anticon-user" style="background-color:#87d068;"></nz-avatar>
-    </div>
-    <div nz-col nzSpan="16">
-      <div class="dy-dialogue dy-dialogue-left">好的，我再试试</div>
-    </div>
+    <div nz-col nzSpan="8" class="dy-user-label">地区：</div>
+    <div nz-col nzSpan="16" class="dy-user-info">{{temp_user.w_country+' '+temp_user.w_province+' '+temp_user.w_city}}</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="8" class="dy-user-label">姓名：</div>
+    <div nz-col nzSpan="16" class="dy-user-info">{{temp_user.t_name}}</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="8" class="dy-user-label">电话：</div>
+    <div nz-col nzSpan="16" class="dy-user-info">{{temp_user.t_phone}}</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="8" class="dy-user-label">邮箱：</div>
+    <div nz-col nzSpan="16" class="dy-user-info">{{temp_user.t_email}}</div>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="8" class="dy-user-label">注册时间：</div>
+    <div nz-col nzSpan="16" class="dy-user-info">{{temp_user.t_time|date:'yyyy-MM-dd HH:mm:ss'}}</div>
   </div>
 </nz-modal>

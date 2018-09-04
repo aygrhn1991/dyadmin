@@ -11,3 +11,22 @@
 .dy-dialogue-left{
     float: left;
 }
+.dy-dialogue-delete{
+    position: absolute;
+    bottom: 0;
+    background: red;
+    color: white;
+    border-radius: 10px;
+    z-index: 1;
+    cursor: pointer;
+}
+.dy-user-label{
+    line-height: 30px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.dy-user-info{
+    line-height: 30px;
+    padding-left: 10px;
+}

@@ -1,0 +1,11 @@
+
+.dy-user-label{
+    line-height: 30px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.dy-user-info{
+    line-height: 30px;
+    padding-left: 10px;
+}
