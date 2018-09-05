@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -9,11 +7,8 @@ import { Location } from '@angular/common';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private routeInfo: ActivatedRoute,private location:Location) { }
+  constructor() { }
 
-  ngOnInit() {
-    console.log(this.location.path());
-    console.log(this.routeInfo.snapshot.paramMap.get('id'));
-  }
+  ngOnInit() { }
 
 }
