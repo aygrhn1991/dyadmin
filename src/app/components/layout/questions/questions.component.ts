@@ -122,12 +122,58 @@ export class QuestionsComponent implements OnInit {
     });
   }
 
-  
-  isVisible_answer = true;
-  showModal_answer(): void {
-    this.isVisible_answer = true;
-  }
-  handleOk_answer():void{
 
+  isVisible_answer = false;
+  answerList = [];
+  temp_qusetion: any = {};
+  temp_answer: any = {};
+  answerContent: string;
+  searchAnswer(id): void {
+    this.http.get('/admin/queryallanswers/' + id).subscribe((data: any) => {
+      this.answerList = data;
+    });
   }
+  showModal_answer(data): void {
+    this.temp_qusetion = data;
+    this.isVisible_answer = true;
+    this.searchAnswer(this.temp_qusetion.t_id);
+  }
+  handleOk_answer(): void {
+    this.temp_answer.t_question_id = this.temp_qusetion.t_id;
+    this.http.post('/admin/addanswer', this.temp_answer).subscribe((data: any) => {
+      if (data == true) {
+        this.message.create('success', '操作成功');
+        this.searchAnswer(this.temp_qusetion.t_id);
+        this.searchData();
+      } else {
+        this.message.create('error', '操作失败');
+      }
+    });
+  }
+  deleteAnswer(e): void {
+    this.modalService.confirm({
+      nzTitle: '提示',
+      nzContent: '确定删除此条消息?',
+      nzOnOk: () => {
+        this.http.get('/admin/deleteanswer/' + e.t_id).subscribe((data: any) => {
+          if (data == true) {
+            this.message.create('success', '操作成功');
+            this.searchAnswer(this.temp_qusetion.t_id);
+          } else {
+            this.message.create('error', '操作失败');
+          }
+        });
+      }
+    });
+  }
+
+  isVisible_user = false;
+  temp_user: any = {};
+  showModal_user(data): void {
+    this.isVisible_user = true;
+    this.http.get('/admin/queryuser/' + data.t_user_id).subscribe((data: any) => {
+      this.temp_user = data;
+    });
+  }
+
 }

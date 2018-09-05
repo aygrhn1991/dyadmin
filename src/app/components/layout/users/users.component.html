@@ -1,0 +1,53 @@
+<nz-table #typeTable nzShowSizeChanger nzSize="small" nzFrontPagination="false" [nzData]="dataSet" [nzLoading]="loading"
+  [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" (nzPageIndexChange)="searchData()" (nzPageSizeChange)="searchData(true)"
+  [nzShowTotal]="rangeTemplate">
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>头像</th>
+      <th>昵称</th>
+      <th>性别</th>
+      <th>地区</th>
+      <th>姓名</th>
+      <th>电话</th>
+      <th>邮箱</th>
+      <th>注册时间</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of typeTable.data">
+      <td>{{data.t_id}}</td>
+      <td>
+        <nz-avatar nzIcon="anticon anticon-user" nzSrc="{{data.w_headimgurl}}"></nz-avatar>
+      </td>
+      <td>{{data.w_nickname}}</td>
+      <td>{{data.w_sex=='1'?'男':data.w_sex=='2'?'女':'未知'}}</td>
+      <td>{{data.w_country+' '+data.w_province+' '+data.w_city}}</td>
+      <td>{{data.t_name}}</td>
+      <td>{{data.t_phone}}</td>
+      <td>{{data.t_email}}</td>
+      <td>{{data.t_time|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+      <td>
+        <button nz-button nzSize="small" nzType="danger" (click)="delete(data)">删除</button>
+        <button nz-button nzSize="small" nzType="primary" (click)="showModal_question(data)">提问记录</button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+<ng-template #rangeTemplate let-range="range" let-total>
+  第{{range[0]}}-{{range[1]}}条 共{{total}}条
+</ng-template>
+<nz-modal [(nzVisible)]="isVisible_question" nzTitle="提问记录" (nzOnCancel)="isVisible_question=false" (nzOnOk)="isVisible_question=false">
+  <div nz-row *ngFor="let data of questionList">
+    <div nz-col nzSpan="2" style="line-height: 30px;">
+      <nz-tag [nzColor]="'lime'">{{data.t_type_name}}</nz-tag>
+    </div>
+    <div nz-col nzSpan="14" style="padding: 5px 10px;font-weight: bold;">
+      {{data.t_title}}
+    </div>
+    <div nz-col nzSpan="8" style="line-height: 30px;">
+      {{data.t_time|date:'yyyy-MM-dd HH:mm:ss'}}
+    </div>
+  </div>
+</nz-modal>

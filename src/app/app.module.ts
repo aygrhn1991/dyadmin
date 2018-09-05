@@ -21,6 +21,7 @@ import { QuestionsComponent } from './components/layout/questions/questions.comp
 
 import { TypecompComponent } from './components/common/typecomp/typecomp.component';
 import { DatecompComponent } from './components/common/datecomp/datecomp.component';
+import { UsersComponent } from './components/layout/users/users.component';
 
 registerLocaleData(zh);
 
@@ -34,7 +35,8 @@ registerLocaleData(zh);
     ArticleComponent,
     TypecompComponent,
     DatecompComponent,
-    QuestionsComponent
+    QuestionsComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
