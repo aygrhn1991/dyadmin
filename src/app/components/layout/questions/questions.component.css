@@ -4,6 +4,7 @@
     margin: 5px;
     border-radius: 5px;
     display: inline-block;
+    text-align: justify;
 }
 .dy-dialogue-right{
     float: right;
