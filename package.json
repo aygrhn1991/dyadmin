@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 4208 --open --disable-host-check",
-    "build": "ng build --prod --base-href /dyadmin/",
+    "build": "ng build --prod --aot --base-href /dyadmin/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
