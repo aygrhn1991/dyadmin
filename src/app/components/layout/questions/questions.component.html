@@ -23,8 +23,8 @@
       <td>{{data.t_type_name}}</td>
       <td>{{data.t_title}}</td>
       <td>
-        <nz-tag [nzColor]="'gold'" *ngIf="data.t_user_id==null">管理员</nz-tag>
-        <span *ngIf="data.t_user_id!=null">{{data.w_nickname}}</span>
+        <nz-tag [nzColor]="'gold'" *ngIf="data.t_user_id==0">管理员</nz-tag>
+        <span *ngIf="data.t_user_id!=0">{{data.w_nickname}}</span>
       </td>
       <td>{{data.t_time|date:'yyyy-MM-dd HH:mm:ss'}}</td>
       <td>
@@ -46,7 +46,7 @@
         <button nz-button nzSize="small" nzType="primary" (click)="showModal_edit(data)">修改</button>
         <button nz-button nzSize="small" nzType="danger" (click)="delete(data)">删除</button>
         <button nz-button nzSize="small" nzType="default" (click)="showModal_answer(data)">查看/回复</button>
-        <button nz-button nzSize="small" nzType="primary" *ngIf="data.t_user_id!=null" (click)="showModal_user(data)">用户信息</button>
+        <button nz-button nzSize="small" nzType="primary" *ngIf="data.t_user_id!=0" (click)="showModal_user(data)">用户信息</button>
       </td>
     </tr>
   </tbody>
@@ -92,15 +92,15 @@
   <div style="height:300px;overflow:auto;padding:10px 0;">
     <div nz-row *ngFor="let data of answerList">
       <div nz-col nzSpan="24" style="font-size:10px;color:#ccc;text-align:center;">{{data.t_time|date:'yyyy-MM-dd HH:mm:ss'}}</div>
-      <div nz-col nzSpan="2" *ngIf="data.t_user_id!=null" style="text-align: center;">
+      <div nz-col nzSpan="2" *ngIf="data.t_user_id!=0" style="text-align: center;">
         <i class="anticon anticon-close-circle-o dy-dialogue-delete" style="left:0;" (click)="deleteAnswer(data)"></i>
         <nz-avatar nzIcon="anticon anticon-user" style="background-color:#fde3cf;"></nz-avatar>
       </div>
-      <div nz-col nzSpan="14" nzOffset="{{data.t_user_id==null?8:null}}">
-        <div class="{{data.t_user_id==null?'dy-dialogue dy-dialogue-right':'dy-dialogue dy-dialogue-left'}}">{{data.t_content}}
+      <div nz-col nzSpan="14" nzOffset="{{data.t_user_id==0?8:0}}">
+        <div class="{{data.t_user_id==0?'dy-dialogue dy-dialogue-right':'dy-dialogue dy-dialogue-left'}}">{{data.t_content}}
         </div>
       </div>
-      <div nz-col nzSpan="2" *ngIf="data.t_user_id==null" style="text-align: center;">
+      <div nz-col nzSpan="2" *ngIf="data.t_user_id==0" style="text-align: center;">
         <i class="anticon anticon-close-circle-o dy-dialogue-delete" style="right:0;" (click)="deleteAnswer(data)"></i>
         <nz-avatar nzIcon="anticon anticon-user" style="background-color:#87d068;"></nz-avatar>
       </div>

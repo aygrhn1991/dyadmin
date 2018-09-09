@@ -142,6 +142,7 @@ export class QuestionsComponent implements OnInit {
     this.temp_answer.t_question_id = this.temp_qusetion.t_id;
     this.http.post('/admin/addanswer', this.temp_answer).subscribe((data: any) => {
       if (data == true) {
+        this.temp_answer.t_content = '';
         this.message.create('success', '操作成功');
         this.searchAnswer(this.temp_qusetion.t_id);
         this.searchData();
