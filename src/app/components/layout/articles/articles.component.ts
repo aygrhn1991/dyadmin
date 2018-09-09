@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpserviceService } from '../../../services/httpservice.service';
 import { NzMessageService } from 'ng-zorro-antd';
 import { NzModalService } from 'ng-zorro-antd';
+import { GlobalService } from '../../../services/global.service';
 
 @Component({
   selector: 'app-articles',
@@ -15,9 +16,9 @@ export class ArticlesComponent implements OnInit {
   total = 1;
   dataSet = [];
   loading = true;
+  fileServer = this.global.fileServer;
 
-
-  constructor(private http: HttpserviceService, private message: NzMessageService, private modalService: NzModalService) {
+  constructor(private http: HttpserviceService, private message: NzMessageService, private modalService: NzModalService, private global: GlobalService) {
   }
   ngOnInit(): void {
     this.searchData();

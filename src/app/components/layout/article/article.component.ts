@@ -4,6 +4,7 @@ import { DatecompComponent } from '../../common/datecomp/datecomp.component';
 import { NzMessageService, UploadFile } from 'ng-zorro-antd';
 import { HttpserviceService } from '../../../services/httpservice.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { GlobalService } from '../../../services/global.service';
 @Component({
   selector: 'app-article',
   templateUrl: './article.component.html',
@@ -22,11 +23,12 @@ export class ArticleComponent implements OnInit {
   };
   imgUrl: string;
   ckeConfig: any;
+  webServer:string=this.global.webServer;
 
   @ViewChild('typeComp') typeComp: TypecompComponent;
   @ViewChild('dateComp') dateComp: DatecompComponent;
 
-  constructor(private message: NzMessageService, private http: HttpserviceService, private routeInfo: ActivatedRoute, private router: Router) { }
+  constructor(private message: NzMessageService, private http: HttpserviceService, private routeInfo: ActivatedRoute, private router: Router, private global: GlobalService) { }
 
   ngOnInit() {
     this.article_id = parseInt(this.routeInfo.snapshot.paramMap.get('id'));
@@ -35,12 +37,12 @@ export class ArticleComponent implements OnInit {
         this.data_model = data;
         this.typeComp.selectedValue = this.data_model.t_type_id;
         this.dateComp.date = new Date(this.data_model.t_time);
-        this.imgUrl = 'http://localhost:8000/article/' + this.data_model.t_cover;
+        this.imgUrl = this.global.fileServer + '/article/' + this.data_model.t_cover;
       });
     }
     this.ckeConfig = {
       image_previewText: ' ',
-      filebrowserImageUploadUrl: 'http://localhost:8088/admin/articleContentUpload',
+      filebrowserImageUploadUrl: this.global.webServer + '/admin/articleContentUpload',
     };
   }
 
@@ -76,7 +78,7 @@ export class ArticleComponent implements OnInit {
     }
     if (info.file.status === 'done') {
       this.data_model.t_cover = info.file.response.path;
-      this.imgUrl = 'http://localhost:8000/article/' + this.data_model.t_cover;
+      this.imgUrl = this.global.fileServer + '/article/' + this.data_model.t_cover;
     }
   }
 }

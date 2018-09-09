@@ -21,7 +21,7 @@
     <tr *ngFor="let data of typeTable.data">
       <td>{{data.t_id}}</td>
       <td>
-        <nz-avatar [nzShape]="'square'" nzSize="large" nzSrc="http://localhost:8000/article/{{data.t_cover}}"></nz-avatar>
+        <nz-avatar [nzShape]="'square'" nzSize="large" nzSrc="{{fileServer}}/article/{{data.t_cover}}"></nz-avatar>
       </td>
       <td>{{data.t_type_name}}</td>
       <td>{{data.t_title}}</td>

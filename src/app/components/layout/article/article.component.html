@@ -26,7 +26,7 @@
   <nz-form-item>
     <nz-form-label [nzSpan]="4">封面图</nz-form-label>
     <nz-form-control [nzSpan]="10">
-      <nz-upload class="avatar-uploader" nzAction="http://localhost:8088/admin/articleCoverUpload" nzName="img" nzListType="picture-card"
+      <nz-upload class="avatar-uploader" nzAction="{{webServer}}/admin/articleCoverUpload" nzName="img" nzListType="picture-card"
         [nzShowUploadList]="false" [nzBeforeUpload]="beforeUpload" (nzChange)="handleChange($event)">
         <ng-container *ngIf="!imgUrl">
           <i class="anticon anticon-plus"></i>
