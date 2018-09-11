@@ -68,7 +68,7 @@ export class QuestionsComponent implements OnInit {
       if (data == true) {
         this.message.create('success', '操作成功');
         this.isVisible_edit = false;
-        this.searchData(true);
+        this.searchData();
       } else {
         this.message.create('error', '操作失败');
       }
@@ -95,7 +95,7 @@ export class QuestionsComponent implements OnInit {
     this.http.get('/admin/setquestiontop/' + data.t_id + '/' + data.t_top).subscribe((data: any) => {
       if (data == true) {
         this.message.create('success', '操作成功');
-        this.searchData(true);
+        this.searchData();
       } else {
         this.message.create('error', '操作失败');
       }
@@ -105,7 +105,7 @@ export class QuestionsComponent implements OnInit {
     this.http.get('/admin/setquestionsort/' + data.t_id + '/' + data.t_sort).subscribe((data: any) => {
       if (data == true) {
         this.message.create('success', '操作成功');
-        this.searchData(true);
+        this.searchData();
       } else {
         this.message.create('error', '操作失败');
       }
@@ -115,7 +115,7 @@ export class QuestionsComponent implements OnInit {
     this.http.get('/admin/setquestionscan/' + data.t_id + '/' + data.t_scan).subscribe((data: any) => {
       if (data == true) {
         this.message.create('success', '操作成功');
-        this.searchData(true);
+        this.searchData();
       } else {
         this.message.create('error', '操作失败');
       }

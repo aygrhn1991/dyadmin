@@ -58,7 +58,7 @@ export class ArticlesComponent implements OnInit {
     this.http.get('/admin/setarticletop/' + data.t_id + '/' + data.t_top).subscribe((data: any) => {
       if (data == true) {
         this.message.create('success', '操作成功');
-        this.searchData(true);
+        this.searchData();
       } else {
         this.message.create('error', '操作失败');
       }
@@ -68,7 +68,7 @@ export class ArticlesComponent implements OnInit {
     this.http.get('/admin/setarticlesort/' + data.t_id + '/' + data.t_sort).subscribe((data: any) => {
       if (data == true) {
         this.message.create('success', '操作成功');
-        this.searchData(true);
+        this.searchData();
       } else {
         this.message.create('error', '操作失败');
       }
@@ -78,7 +78,7 @@ export class ArticlesComponent implements OnInit {
     this.http.get('/admin/setarticlescan/' + data.t_id + '/' + data.t_scan).subscribe((data: any) => {
       if (data == true) {
         this.message.create('success', '操作成功');
-        this.searchData(true);
+        this.searchData();
       } else {
         this.message.create('error', '操作失败');
       }
