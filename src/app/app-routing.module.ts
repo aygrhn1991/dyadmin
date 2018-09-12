@@ -7,6 +7,7 @@ import { ArticlesComponent } from './components/layout/articles/articles.compone
 import { ArticleComponent } from './components/layout/article/article.component';
 import { QuestionsComponent } from './components/layout/questions/questions.component';
 import { UsersComponent } from './components/layout/users/users.component';
+import { TagsComponent } from './components/layout/tags/tags.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -19,7 +20,8 @@ const routes: Routes = [
       { path: 'articles', component: ArticlesComponent },
       { path: 'article/:id', component: ArticleComponent },
       { path: 'questions', component: QuestionsComponent },
-      { path: 'users', component: UsersComponent }
+      { path: 'users', component: UsersComponent },
+      { path: 'tags', component: TagsComponent }
     ]
   },
   { path: 'login', component: LoginComponent },

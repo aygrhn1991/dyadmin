@@ -22,6 +22,7 @@ import { QuestionsComponent } from './components/layout/questions/questions.comp
 import { TypecompComponent } from './components/common/typecomp/typecomp.component';
 import { DatecompComponent } from './components/common/datecomp/datecomp.component';
 import { UsersComponent } from './components/layout/users/users.component';
+import { TagsComponent } from './components/layout/tags/tags.component';
 
 registerLocaleData(zh);
 
@@ -36,7 +37,8 @@ registerLocaleData(zh);
     TypecompComponent,
     DatecompComponent,
     QuestionsComponent,
-    UsersComponent
+    UsersComponent,
+    TagsComponent
   ],
   imports: [
     BrowserModule,

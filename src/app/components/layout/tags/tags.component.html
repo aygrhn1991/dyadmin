@@ -1,0 +1,46 @@
+<nz-table #typeTable nzShowSizeChanger nzSize="small" nzFrontPagination="false" [nzData]="dataSet" [nzLoading]="loading"
+  [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" (nzPageIndexChange)="searchData()" (nzPageSizeChange)="searchData(true)"
+  [nzShowTotal]="rangeTemplate">
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>标签名称</th>
+      <th>
+        <button nz-button nzSize="small" nzType="primary" (click)="showModal_add()">新增</button>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of typeTable.data">
+      <td>{{data.t_id}}</td>
+      <td>{{data.t_tag_name}}</td>
+      <td>
+        <button nz-button nzSize="small" nzType="primary" (click)="showModal_edit(data)">修改</button>
+        <button nz-button nzSize="small" nzType="danger" (click)="delete(data)">删除</button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+<ng-template #rangeTemplate let-range="range" let-total>
+  第{{range[0]}}-{{range[1]}}条 共{{total}}条
+</ng-template>
+<nz-modal [(nzVisible)]="isVisible_add" nzTitle="标签添加" (nzOnCancel)="isVisible_add=false" (nzOnOk)="handleOk_add()">
+  <form nz-form>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6">标签名称</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input [(ngModel)]="data_add.t_tag_name" name="data_add.t_tag_name">
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>
+<nz-modal [(nzVisible)]="isVisible_edit" nzTitle="标签修改" (nzOnCancel)="isVisible_edit=false" (nzOnOk)="handleOk_edit()">
+  <form nz-form>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6">标签名称</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input [(ngModel)]="data_edit.t_tag_name" name="data_edit.t_tag_name">
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>
