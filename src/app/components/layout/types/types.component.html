@@ -15,8 +15,8 @@
       <td>{{data.t_id}}</td>
       <td>{{data.t_type_name}}</td>
       <td>
-        <button nz-button nzSize="small" nzType="primary" (click)="showModal_edit(data)">修改</button>
-        <button nz-button nzSize="small" nzType="danger" (click)="delete(data)">删除</button>
+        <button nz-button nzSize="small" nzType="primary" (click)="showModal_edit(data)" *ngIf="data.t_id!=1&&data.t_id!=2">修改</button>
+        <button nz-button nzSize="small" nzType="danger" (click)="delete(data)" *ngIf="data.t_id!=1&&data.t_id!=2">删除</button>
       </td>
     </tr>
   </tbody>
