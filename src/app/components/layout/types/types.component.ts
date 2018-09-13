@@ -9,9 +9,9 @@ import { NzModalService } from 'ng-zorro-antd';
   styleUrls: ['./types.component.css']
 })
 export class TypesComponent implements OnInit {
-  pageIndex = 1;
-  pageSize = 10;
-  total = 1;
+  pageIndex: number = 1;
+  pageSize: number = 10;
+  total: number = 1;
   dataSet = [];
   loading = true;
   isVisible_add = false;

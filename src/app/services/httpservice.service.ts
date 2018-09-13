@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { GlobalService } from './global.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpserviceService {
 
-  baseUrl: string = 'http://localhost:4208/dy';
+  baseUrl: string = this.global.webServer;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private global: GlobalService) { }
   public get(url: string) {
     return this.http.get(this.baseUrl + url);
   }

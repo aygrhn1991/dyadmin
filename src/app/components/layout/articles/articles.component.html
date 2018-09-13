@@ -1,6 +1,22 @@
+<form nz-form>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="2">科室</nz-form-label>
+    <nz-form-control [nzSpan]="4">
+      <app-typecomp #typeComp></app-typecomp>
+    </nz-form-control>
+    <nz-form-label [nzSpan]="2">标题</nz-form-label>
+    <nz-form-control [nzSpan]="4">
+      <input nz-input [(ngModel)]="keyword" name="keyword">
+    </nz-form-control>
+    <nz-form-control [nzSpan]="4" [nzPush]="1">
+      <button nz-button nzSize="small" nzType="primary" (click)="searchData(true)">搜索</button>&nbsp;
+      <button nz-button nzSize="small" nzType="primary" (click)="reset()">重置</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>
 <nz-table #typeTable nzShowSizeChanger nzSize="small" nzFrontPagination="false" [nzData]="dataSet" [nzLoading]="loading"
-  [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" (nzPageIndexChange)="searchData()" (nzPageSizeChange)="searchData(true)"
-  [nzShowTotal]="rangeTemplate">
+  [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" (nzPageIndexChange)="searchData()"
+  (nzPageSizeChange)="searchData(true)" [nzShowTotal]="rangeTemplate">
   <thead>
     <tr>
       <th>id</th>

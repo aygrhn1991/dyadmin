@@ -7,7 +7,7 @@ import { HttpserviceService } from '../../../services/httpservice.service';
   styleUrls: ['./typecomp.component.css']
 })
 export class TypecompComponent implements OnInit {
-  selectedValue: number;
+  selectedValue: number = 0;
   typeList: any = [];
   constructor(private http: HttpserviceService) { }
 

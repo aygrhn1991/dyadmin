@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpserviceService } from '../../../services/httpservice.service';
 import { NzMessageService } from 'ng-zorro-antd';
 import { NzModalService } from 'ng-zorro-antd';
 import { GlobalService } from '../../../services/global.service';
+import { TypecompComponent } from '../../common/typecomp/typecomp.component';
 
 @Component({
   selector: 'app-articles',
@@ -11,14 +12,20 @@ import { GlobalService } from '../../../services/global.service';
 })
 export class ArticlesComponent implements OnInit {
 
-  pageIndex = 1;
-  pageSize = 10;
-  total = 1;
+  pageIndex: number = 1;
+  pageSize: number = 10;
+  total: number = 1;
+  keyword = '';
   dataSet = [];
   loading = true;
   fileServer = this.global.fileServer;
 
-  constructor(private http: HttpserviceService, private message: NzMessageService, private modalService: NzModalService, private global: GlobalService) {
+  @ViewChild('typeComp') typeComp: TypecompComponent;
+
+  constructor(private http: HttpserviceService,
+    private message: NzMessageService,
+    private modalService: NzModalService,
+    private global: GlobalService) {
   }
   ngOnInit(): void {
     this.searchData();
@@ -28,14 +35,25 @@ export class ArticlesComponent implements OnInit {
       this.pageIndex = 1;
     }
     this.loading = true;
-    this.http.get('/admin/queryarticlescount').subscribe((data: any) => {
-      this.loading = false;
-      this.total = data;
-    });
-    this.http.get('/admin/queryarticles/' + this.pageIndex + '/' + this.pageSize).subscribe((data: any) => {
-      this.loading = false;
-      this.dataSet = data;
-    });
+    this.http.get('/admin/queryarticlescount/' +
+      (this.typeComp.selectedValue == null ? 0 : this.typeComp.selectedValue) + '/' +
+      this.keyword).subscribe((data: any) => {
+        this.loading = false;
+        this.total = data;
+      });
+    this.http.get('/admin/queryarticles/' +
+      this.pageIndex + '/' +
+      this.pageSize + '/' +
+      (this.typeComp.selectedValue == null ? 0 : this.typeComp.selectedValue) + '/' +
+      this.keyword).subscribe((data: any) => {
+        this.loading = false;
+        this.dataSet = data;
+      });
+  }
+  reset(): void {
+    this.typeComp.selectedValue = null;
+    this.keyword = '';
+    this.searchData();
   }
   delete(e): void {
     this.modalService.confirm({
