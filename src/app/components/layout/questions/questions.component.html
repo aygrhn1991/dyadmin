@@ -1,6 +1,25 @@
+<form nz-form>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="2">状态</nz-form-label>
+    <nz-form-control [nzSpan]="4">
+      <nz-select [(ngModel)]="state" nzAllowClear name="state">
+        <nz-option nzValue="0" nzLabel="未回复"></nz-option>
+        <nz-option nzValue="1" nzLabel="已回复"></nz-option>
+      </nz-select>
+    </nz-form-control>
+    <nz-form-label [nzSpan]="2">标题</nz-form-label>
+    <nz-form-control [nzSpan]="4">
+      <input nz-input [(ngModel)]="keyword" name="keyword">
+    </nz-form-control>
+    <nz-form-control [nzSpan]="4" [nzPush]="1">
+      <button nz-button nzSize="small" nzType="primary" (click)="searchData(true)">搜索</button>&nbsp;
+      <button nz-button nzSize="small" nzType="primary" (click)="reset()">重置</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>
 <nz-table #typeTable nzShowSizeChanger nzSize="small" nzFrontPagination="false" [nzData]="dataSet" [nzLoading]="loading"
-  [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" (nzPageIndexChange)="searchData()" (nzPageSizeChange)="searchData(true)"
-  [nzShowTotal]="rangeTemplate">
+  [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" (nzPageIndexChange)="searchData()"
+  (nzPageSizeChange)="searchData(true)" [nzShowTotal]="rangeTemplate">
   <thead>
     <tr>
       <th>id</th>
@@ -62,12 +81,6 @@
         <app-typecomp #typeComp_Add></app-typecomp>
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSpan]="6">问题</nz-form-label>
-      <nz-form-control [nzSpan]="14">
-        <input nz-input [(ngModel)]="data_add.t_title" name="data_add.t_title">
-      </nz-form-control>
-    </nz-form-item>
   </form>
 </nz-modal>
 <nz-modal [(nzVisible)]="isVisible_edit" nzTitle="问题修改" (nzOnCancel)="isVisible_edit=false" (nzOnOk)="handleOk_edit()">
@@ -78,12 +91,6 @@
         <app-typecomp #typeComp_Edit></app-typecomp>
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSpan]="6">问题</nz-form-label>
-      <nz-form-control [nzSpan]="14">
-        <input nz-input [(ngModel)]="data_edit.t_title" name="data_edit.t_title">
-      </nz-form-control>
-    </nz-form-item>
   </form>
 </nz-modal>
 <nz-modal [(nzVisible)]="isVisible_answer" nzTitle="问题查看/回复" nzOkText="回复" nzCancelText="关闭" (nzOnCancel)="isVisible_answer=false"
@@ -91,7 +98,8 @@
   <p style="font-weight: bold;font-size: 20px;">{{temp_qusetion.t_title}}</p>
   <div style="height:300px;overflow:auto;padding:10px 0;">
     <div nz-row *ngFor="let data of answerList">
-      <div nz-col nzSpan="24" style="font-size:10px;color:#ccc;text-align:center;">{{data.t_time|date:'yyyy-MM-dd HH:mm:ss'}}</div>
+      <div nz-col nzSpan="24" style="font-size:10px;color:#ccc;text-align:center;">{{data.t_time|date:'yyyy-MM-dd
+        HH:mm:ss'}}</div>
       <div nz-col nzSpan="2" *ngIf="data.t_user_id!=0" style="text-align: center;">
         <i class="anticon anticon-close-circle-o dy-dialogue-delete" style="left:0;" (click)="deleteAnswer(data)"></i>
         <nz-avatar nzIcon="anticon anticon-user" style="background-color:#fde3cf;"></nz-avatar>

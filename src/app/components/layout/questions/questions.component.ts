@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpserviceService } from '../../../services/httpservice.service';
 import { NzMessageService } from 'ng-zorro-antd';
 import { NzModalService } from 'ng-zorro-antd';
-import { TypecompComponent } from '../../common/typecomp/typecomp.component';
 
 @Component({
   selector: 'app-questions',
@@ -13,6 +12,8 @@ export class QuestionsComponent implements OnInit {
   pageIndex = 1;
   pageSize = 10;
   total = 1;
+  state: number = -1;
+  keyword = '';
   dataSet = [];
   loading = true;
   isVisible_add = false;
@@ -20,10 +21,9 @@ export class QuestionsComponent implements OnInit {
   data_add: any = {};
   data_edit: any = {};
 
-  @ViewChild('typeComp_Add') typeComp_Add: TypecompComponent;
-  @ViewChild('typeComp_Edit') typeComp_Edit: TypecompComponent;
-
-  constructor(private http: HttpserviceService, private message: NzMessageService, private modalService: NzModalService) {
+  constructor(private http: HttpserviceService, 
+    private message: NzMessageService, 
+    private modalService: NzModalService) {
   }
   ngOnInit(): void {
     this.searchData();
@@ -48,10 +48,8 @@ export class QuestionsComponent implements OnInit {
   showModal_edit(e): void {
     this.isVisible_edit = true;
     this.data_edit = e;
-    this.typeComp_Edit.selectedValue = this.data_edit.t_type_id;
   }
   handleOk_add(): void {
-    this.data_add.t_type_id = this.typeComp_Add.selectedValue;
     this.http.post('/admin/addquestion', this.data_add).subscribe((data: any) => {
       if (data == true) {
         this.message.create('success', '操作成功');
@@ -63,7 +61,6 @@ export class QuestionsComponent implements OnInit {
     });
   }
   handleOk_edit(): void {
-    this.data_edit.t_type_id = this.typeComp_Edit.selectedValue;
     this.http.post('/admin/editquestion', this.data_edit).subscribe((data: any) => {
       if (data == true) {
         this.message.create('success', '操作成功');
