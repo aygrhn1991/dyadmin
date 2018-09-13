@@ -9,9 +9,9 @@ import { NzModalService } from 'ng-zorro-antd';
   styleUrls: ['./questions.component.css']
 })
 export class QuestionsComponent implements OnInit {
-  pageIndex = 1;
-  pageSize = 10;
-  total = 1;
+  pageIndex: number = 1;
+  pageSize: number = 10;
+  total: number = 1;
   state: number = -1;
   keyword = '';
   dataSet = [];
@@ -21,33 +21,53 @@ export class QuestionsComponent implements OnInit {
   data_add: any = {};
   data_edit: any = {};
 
-  constructor(private http: HttpserviceService, 
-    private message: NzMessageService, 
+  constructor(private http: HttpserviceService,
+    private message: NzMessageService,
     private modalService: NzModalService) {
   }
   ngOnInit(): void {
     this.searchData();
+    this.searchTags();
   }
   searchData(reset: boolean = false): void {
     if (reset) {
       this.pageIndex = 1;
     }
     this.loading = true;
-    this.http.get('/admin/queryquestionscount').subscribe((data: any) => {
-      this.loading = false;
-      this.total = data;
-    });
-    this.http.get('/admin/queryquestions/' + this.pageIndex + '/' + this.pageSize).subscribe((data: any) => {
-      this.loading = false;
-      this.dataSet = data;
-    });
+    this.http.get('/admin/queryquestionscount/' +
+      (this.state == null ? -1 : this.state) + '/' +
+      this.keyword).subscribe((data: any) => {
+        this.loading = false;
+        this.total = data;
+      });
+    this.http.get('/admin/queryquestions/' +
+      this.pageIndex + '/' +
+      this.pageSize + '/' +
+      (this.state == null ? -1 : this.state) + '/' +
+      this.keyword).subscribe((data: any) => {
+        this.loading = false;
+        this.dataSet = data;
+      });
+  }
+  reset(): void {
+    this.state = null;
+    this.keyword = '';
+    this.searchData();
   }
   showModal_add(): void {
     this.isVisible_add = true;
   }
   showModal_edit(e): void {
+    let that = this;
     this.isVisible_edit = true;
     this.data_edit = e;
+    this.tagList.forEach(function (f) {
+      if (that.data_edit.tags.filter(function (g) { return g.t_id == f.t_id }).length == 1) {
+        f.selected = true;
+      } else {
+        f.selected = false;
+      }
+    });
   }
   handleOk_add(): void {
     this.http.post('/admin/addquestion', this.data_add).subscribe((data: any) => {
@@ -61,6 +81,13 @@ export class QuestionsComponent implements OnInit {
     });
   }
   handleOk_edit(): void {
+    let temp_tags = [];//这里这么写是因为闭包(注释by陈玉锋)
+    this.tagList.forEach(function (e) {
+      if (e.selected) {
+        temp_tags.push(e.t_id);
+      }
+    });
+    this.data_edit.tags = temp_tags;
     this.http.post('/admin/editquestion', this.data_edit).subscribe((data: any) => {
       if (data == true) {
         this.message.create('success', '操作成功');
@@ -173,5 +200,14 @@ export class QuestionsComponent implements OnInit {
       this.temp_user = data;
     });
   }
+
+  tagList = [];
+  searchTags(): void {
+    this.http.get('/admin/queryalltags/').subscribe((data: any) => {
+      this.tagList = data;
+    });
+  }
+
+
 
 }

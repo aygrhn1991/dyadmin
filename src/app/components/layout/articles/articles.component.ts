@@ -36,7 +36,7 @@ export class ArticlesComponent implements OnInit {
     }
     this.loading = true;
     this.http.get('/admin/queryarticlescount/' +
-      (this.typeComp.selectedValue == null ? 0 : this.typeComp.selectedValue) + '/' +
+      (this.typeComp.selectedValue == null ? -1 : this.typeComp.selectedValue) + '/' +
       this.keyword).subscribe((data: any) => {
         this.loading = false;
         this.total = data;
@@ -44,7 +44,7 @@ export class ArticlesComponent implements OnInit {
     this.http.get('/admin/queryarticles/' +
       this.pageIndex + '/' +
       this.pageSize + '/' +
-      (this.typeComp.selectedValue == null ? 0 : this.typeComp.selectedValue) + '/' +
+      (this.typeComp.selectedValue == null ? -1 : this.typeComp.selectedValue) + '/' +
       this.keyword).subscribe((data: any) => {
         this.loading = false;
         this.dataSet = data;
