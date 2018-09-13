@@ -15,8 +15,8 @@
   </nz-form-item>
 </form>
 <nz-table #typeTable nzShowSizeChanger nzSize="small" nzFrontPagination="false" [nzData]="dataSet" [nzLoading]="loading"
-  [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" (nzPageIndexChange)="searchData()"
-  (nzPageSizeChange)="searchData(true)" [nzShowTotal]="rangeTemplate">
+  [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" (nzPageIndexChange)="searchData()" (nzPageSizeChange)="searchData(true)"
+  [nzShowTotal]="rangeTemplate">
   <thead>
     <tr>
       <th>id</th>
@@ -25,7 +25,8 @@
       <th style="width: 200px;">标题</th>
       <th>作者</th>
       <th>时间</th>
-      <th>浏览次数</th>
+      <th>浏览量</th>
+      <th>浏览量</th>
       <th>排序</th>
       <th>置顶</th>
       <th>
@@ -43,6 +44,7 @@
       <td>{{data.t_title}}</td>
       <td>{{data.t_author}}</td>
       <td>{{data.t_time|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+      <td>{{data.t_scan_origin}}</td>
       <td>
         <input nz-input nzSize="small" [(ngModel)]="data.t_scan" style="width: 50px;">
         <a (click)="setScan(data)">保存</a>

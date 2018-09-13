@@ -27,7 +27,8 @@
       <th style="width: 200px;">问题</th>
       <th>提问人</th>
       <th>时间</th>
-      <th>浏览次数</th>
+      <th>浏览量</th>
+      <th>浏览量</th>
       <th>排序</th>
       <th>置顶</th>
       <th>状态</th>
@@ -48,6 +49,7 @@
         <span *ngIf="data.t_user_id!=0">{{data.w_nickname}}</span>
       </td>
       <td>{{data.t_time|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+      <td>{{data.t_scan_origin}}</td>
       <td>
         <input nz-input nzSize="small" [(ngModel)]="data.t_scan" style="width: 50px;">
         <a (click)="setScan(data)">保存</a>

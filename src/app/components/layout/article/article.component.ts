@@ -28,7 +28,11 @@ export class ArticleComponent implements OnInit {
   @ViewChild('typeComp') typeComp: TypecompComponent;
   @ViewChild('dateComp') dateComp: DatecompComponent;
 
-  constructor(private message: NzMessageService, private http: HttpserviceService, private routeInfo: ActivatedRoute, private router: Router, private global: GlobalService) { }
+  constructor(private message: NzMessageService, 
+    private http: HttpserviceService, 
+    private routeInfo: ActivatedRoute, 
+    private router: Router, 
+    private global: GlobalService) { }
 
   ngOnInit() {
     this.article_id = parseInt(this.routeInfo.snapshot.paramMap.get('id'));
