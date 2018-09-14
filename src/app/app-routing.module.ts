@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
+import { RouteguardService } from './services/routeguard.service';
 import { LayoutComponent } from './components/layout/layout.component';
 import { TypesComponent } from './components/layout/types/types.component';
 import { ArticlesComponent } from './components/layout/articles/articles.component';
@@ -17,7 +18,7 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: '', redirectTo: 'questions', pathMatch: 'full' },
-      { path: 'types', component: TypesComponent },
+      { path: 'types', component: TypesComponent, canActivate: [RouteguardService] },
       { path: 'articles', component: ArticlesComponent },
       { path: 'article/:id', component: ArticleComponent },
       { path: 'questions', component: QuestionsComponent },
