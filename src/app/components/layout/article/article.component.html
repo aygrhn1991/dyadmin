@@ -1,3 +1,4 @@
+<nz-alert nzType="warning" nzMessage="请将上传图片大小限制1M以内(封面图，文本编辑器上传图片)" nzShowIcon></nz-alert>
 <form nz-form>
   <nz-form-item>
     <nz-form-label [nzSpan]="4">科室</nz-form-label>
@@ -38,6 +39,6 @@
   </nz-form-item>
 </form>
 <ckeditor [(ngModel)]="data_model.t_content" #ckeditor [config]="ckeConfig"></ckeditor>
-<div style="text-align: center">
+<div style="text-align: center;padding: 10px;">
   <button nz-button nzSize="small" nzType="primary" (click)="save()">保存</button>
 </div>

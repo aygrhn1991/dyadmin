@@ -1,6 +1,7 @@
+<nz-alert nzType="warning" nzMessage="妇产科，儿科为内置科室，不能进行修改删除，如需修改，请联系开发人员" nzShowIcon></nz-alert>
 <nz-table #typeTable nzShowSizeChanger nzSize="small" nzFrontPagination="false" [nzData]="dataSet" [nzLoading]="loading"
-  [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" (nzPageIndexChange)="searchData()" (nzPageSizeChange)="searchData(true)"
-  [nzShowTotal]="rangeTemplate">
+  [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" (nzPageIndexChange)="searchData()"
+  (nzPageSizeChange)="searchData(true)" [nzShowTotal]="rangeTemplate">
   <thead>
     <tr>
       <th>id</th>

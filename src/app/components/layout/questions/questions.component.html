@@ -1,3 +1,4 @@
+<nz-alert nzType="warning" nzMessage="排序规则：置顶>排序>浏览量" nzShowIcon></nz-alert>
 <form nz-form>
   <nz-form-item>
     <nz-form-label [nzSpan]="2">状态</nz-form-label>
@@ -18,13 +19,13 @@
   </nz-form-item>
 </form>
 <nz-table #typeTable nzShowSizeChanger nzSize="small" nzFrontPagination="false" [nzData]="dataSet" [nzLoading]="loading"
-  [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" (nzPageIndexChange)="searchData()" (nzPageSizeChange)="searchData(true)"
-  [nzShowTotal]="rangeTemplate">
+  [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" (nzPageIndexChange)="searchData()"
+  (nzPageSizeChange)="searchData(true)" [nzShowTotal]="rangeTemplate" [nzScroll]="{ x:'1500px' }">
   <thead>
     <tr>
-      <th>id</th>
-      <th style="width: 200px;">标签</th>
-      <th style="width: 200px;">问题</th>
+      <th nzWidth="50px" nzLeft="0px">id</th>
+      <th nzWidth="300px" nzLeft="50px">问题</th>
+      <th nzWidth="200px">标签</th>
       <th>提问人</th>
       <th>时间</th>
       <th>浏览量</th>
@@ -39,11 +40,11 @@
   </thead>
   <tbody>
     <tr *ngFor="let data of typeTable.data">
-      <td>{{data.t_id}}</td>
+      <td nzLeft="0px">{{data.t_id}}</td>
+      <td nzLeft="50px">{{data.t_title}}</td>
       <td>
         <nz-tag [nzColor]="'gold'" *ngFor="let d of data.tags">{{d.t_tag_name}}</nz-tag>
       </td>
-      <td>{{data.t_title}}</td>
       <td>
         <nz-tag [nzColor]="'gold'" *ngIf="data.t_user_id==0">管理员</nz-tag>
         <span *ngIf="data.t_user_id!=0">{{data.w_nickname}}</span>
@@ -106,7 +107,8 @@
   <p style="font-weight: bold;font-size: 20px;">{{temp_qusetion.t_title}}</p>
   <div style="height:300px;overflow:auto;padding:10px 0;">
     <div nz-row *ngFor="let data of answerList">
-      <div nz-col nzSpan="24" style="font-size:10px;color:#ccc;text-align:center;">{{data.t_time|date:'yyyy-MM-dd HH:mm:ss'}}
+      <div nz-col nzSpan="24" style="font-size:10px;color:#ccc;text-align:center;">{{data.t_time|date:'yyyy-MM-dd
+        HH:mm:ss'}}
       </div>
       <div nz-col nzSpan="2" *ngIf="data.t_user_id!=0" style="text-align: center;">
         <i class="anticon anticon-close-circle-o dy-dialogue-delete" style="left:0;" (click)="deleteAnswer(data)"></i>
