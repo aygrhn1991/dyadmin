@@ -38,7 +38,11 @@
     </nz-form-control>
   </nz-form-item>
 </form>
-<ckeditor [(ngModel)]="data_model.t_content" #ckeditor [config]="ckeConfig"></ckeditor>
+<div nz-row>
+  <div nz-col nzSpan="15" nzPush="3">
+    <ckeditor [(ngModel)]="data_model.t_content" #ckeditor [config]="ckeConfig"></ckeditor>
+  </div>
+</div>
 <div style="text-align: center;padding: 10px;">
   <button nz-button nzSize="small" nzType="primary" (click)="save()">保存</button>
 </div>
