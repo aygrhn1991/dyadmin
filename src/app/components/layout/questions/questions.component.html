@@ -19,8 +19,8 @@
   </nz-form-item>
 </form>
 <nz-table #typeTable nzShowSizeChanger nzSize="small" nzFrontPagination="false" [nzData]="dataSet" [nzLoading]="loading"
-  [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" (nzPageIndexChange)="searchData()"
-  (nzPageSizeChange)="searchData(true)" [nzShowTotal]="rangeTemplate" [nzScroll]="{ x:'1500px' }">
+  [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" (nzPageIndexChange)="searchData()" (nzPageSizeChange)="searchData(true)"
+  [nzShowTotal]="rangeTemplate" [nzScroll]="{ x:'1500px' }">
   <thead>
     <tr>
       <th nzWidth="50px" nzLeft="0px">id</th>
@@ -107,15 +107,18 @@
   <p style="font-weight: bold;font-size: 20px;">{{temp_qusetion.t_title}}</p>
   <div style="height:300px;overflow:auto;padding:10px 0;">
     <div nz-row *ngFor="let data of answerList">
-      <div nz-col nzSpan="24" style="font-size:10px;color:#ccc;text-align:center;">{{data.t_time|date:'yyyy-MM-dd
-        HH:mm:ss'}}
+      <div nz-col nzSpan="24" style="font-size:10px;color:#ccc;text-align:center;">{{data.t_time|date:'yyyy-MM-dd HH:mm:ss'}}
       </div>
       <div nz-col nzSpan="2" *ngIf="data.t_user_id!=0" style="text-align: center;">
         <i class="anticon anticon-close-circle-o dy-dialogue-delete" style="left:0;" (click)="deleteAnswer(data)"></i>
         <nz-avatar nzIcon="anticon anticon-user" style="background-color:#fde3cf;"></nz-avatar>
       </div>
       <div nz-col nzSpan="14" nzOffset="{{data.t_user_id==0?8:0}}">
-        <div class="{{data.t_user_id==0?'dy-dialogue dy-dialogue-right':'dy-dialogue dy-dialogue-left'}}">{{data.t_content}}
+        <div class="{{data.t_user_id==0?'dy-dialogue dy-dialogue-right':'dy-dialogue dy-dialogue-left'}}" *ngIf="data.t_isimg==false">
+          {{data.t_content}}
+        </div>
+        <div class="{{data.t_user_id==0?'dy-dialogue dy-dialogue-right':'dy-dialogue dy-dialogue-left'}}" *ngIf="data.t_isimg==true">
+          <img src="{{fileServer}}/user/{{data.t_content}}" style="width: 100%;">
         </div>
       </div>
       <div nz-col nzSpan="2" *ngIf="data.t_user_id==0" style="text-align: center;">

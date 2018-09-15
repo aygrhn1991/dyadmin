@@ -19,12 +19,12 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'questions', pathMatch: 'full' },
       { path: 'types', component: TypesComponent, canActivate: [RouteguardService] },
-      { path: 'articles', component: ArticlesComponent },
-      { path: 'article/:id', component: ArticleComponent },
-      { path: 'questions', component: QuestionsComponent },
-      { path: 'users', component: UsersComponent },
-      { path: 'tags', component: TagsComponent },
-      { path: 'password', component: PasswordComponent }
+      { path: 'articles', component: ArticlesComponent, canActivate: [RouteguardService] },
+      { path: 'article/:id', component: ArticleComponent, canActivate: [RouteguardService] },
+      { path: 'questions', component: QuestionsComponent, canActivate: [RouteguardService] },
+      { path: 'users', component: UsersComponent, canActivate: [RouteguardService] },
+      { path: 'tags', component: TagsComponent, canActivate: [RouteguardService] },
+      { path: 'password', component: PasswordComponent, canActivate: [RouteguardService] }
     ]
   },
   { path: 'login', component: LoginComponent },

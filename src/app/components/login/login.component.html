@@ -1,26 +1,14 @@
-<p>
-  login works!
-</p>
-<span [routerLink]="['/layout']">qq</span>
-
-https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx0ab15b2929341b9f&redirect_uri=http%3a%2f%2fdydydy.free.idcfengye.com%2f%23%2flogin&response_type=code&scope=snsapi_base&state=dy#wechat_redirect
-
-
-
-
-http://dydydy.free.idcfengye.com/#/login
-http%3a%2f%2fdydydy.free.idcfengye.com%2f%23%2flogin
-
-
-
-
-
-
-java sql排序
-hidden统一一下
-表格列宽
-
-处理回复问题后问题的状态
-
-login页
-title
+<form nz-form style="max-width: 300px;margin:0 auto;padding-top: 10%;">
+  <nz-form-item>
+    <nz-form-control>
+      <nz-input-group nzPrefixIcon="anticon anticon-lock">
+        <input type="password" nz-input [(ngModel)]="password" name="password">
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <button nz-button [nzType]="'primary'" style="width: 100%;" (click)="login()">登陆</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

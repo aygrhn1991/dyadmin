@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpserviceService } from '../../../services/httpservice.service';
 import { NzMessageService } from 'ng-zorro-antd';
 import { NzModalService } from 'ng-zorro-antd';
+import { GlobalService } from '../../../services/global.service';
 
 @Component({
   selector: 'app-questions',
@@ -20,10 +21,12 @@ export class QuestionsComponent implements OnInit {
   isVisible_edit = false;
   data_add: any = {};
   data_edit: any = {};
+  fileServer = this.global.fileServer;
 
   constructor(private http: HttpserviceService,
     private message: NzMessageService,
-    private modalService: NzModalService) {
+    private modalService: NzModalService,
+    private global: GlobalService) {
   }
   ngOnInit(): void {
     this.searchData();
