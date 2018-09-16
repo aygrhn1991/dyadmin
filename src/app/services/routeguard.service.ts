@@ -21,7 +21,7 @@ export class RouteguardService implements CanActivate {
     let cookieArray = cookies.split(";");
     for (var i = 0; i < cookieArray.length; i++) {
       var arr = cookieArray[i].split("=");
-      if (arr[0] == name) {
+      if (arr[0].trim() == name) {
         return arr[1];
       }
     }
