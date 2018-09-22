@@ -10,4 +10,11 @@
         </nz-form-control>
     </nz-form-item>
 </form>
-<div echarts [options]="question_count_by_day_option"></div>
+<div nz-row>
+    <div nz-col nzSpan="16">
+        <div echarts [options]="question_count_by_day_option"></div>
+    </div>
+    <div nz-col nzSpan="8">
+        <div echarts [options]="question_count_by_tag_option"></div>
+    </div>
+</div>
