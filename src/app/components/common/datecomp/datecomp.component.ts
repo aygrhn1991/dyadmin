@@ -6,10 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./datecomp.component.css']
 })
 export class DatecompComponent implements OnInit {
+
   date: Date = new Date();
+
   constructor() { }
-  ngOnInit() {
+
+  ngOnInit() { }
+
+  onChange(result: Date): void {
+    if (this.date == null) {
+      this.date = new Date();
+    }
   }
-  onChange(result: Date): void { }
 
 }

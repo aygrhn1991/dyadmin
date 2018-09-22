@@ -1,0 +1,13 @@
+<nz-alert nzType="warning" nzMessage="选择1~7号日期，显示的数据为1~6号23:59:59秒的数据" nzShowIcon></nz-alert>
+<form nz-form>
+    <nz-form-item>
+        <nz-form-label [nzSpan]="2">日期</nz-form-label>
+        <nz-form-control [nzSpan]="5">
+            <app-daterangecomp #daterangeComp></app-daterangecomp>
+        </nz-form-control>
+        <nz-form-control [nzSpan]="4" [nzPush]="1">
+            <button nz-button nzSize="small" nzType="primary" (click)="searchData()">搜索</button>
+        </nz-form-control>
+    </nz-form-item>
+</form>
+<div echarts [options]="question_count_by_day_option"></div>

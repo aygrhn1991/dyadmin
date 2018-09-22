@@ -10,6 +10,8 @@ import { QuestionsComponent } from './components/layout/questions/questions.comp
 import { UsersComponent } from './components/layout/users/users.component';
 import { TagsComponent } from './components/layout/tags/tags.component';
 import { PasswordComponent } from './components/layout/password/password.component';
+import { TipsComponent } from './components/layout/tips/tips.component';
+import { StatisticsComponent } from './components/layout/statistics/statistics.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -24,7 +26,9 @@ const routes: Routes = [
       { path: 'questions', component: QuestionsComponent, canActivate: [RouteguardService] },
       { path: 'users', component: UsersComponent, canActivate: [RouteguardService] },
       { path: 'tags', component: TagsComponent, canActivate: [RouteguardService] },
-      { path: 'password', component: PasswordComponent, canActivate: [RouteguardService] }
+      { path: 'password', component: PasswordComponent, canActivate: [RouteguardService] },
+      { path: 'tips', component: TipsComponent, canActivate: [RouteguardService] },
+      { path: 'statistics', component: StatisticsComponent, canActivate: [RouteguardService] }
     ]
   },
   { path: 'login', component: LoginComponent },

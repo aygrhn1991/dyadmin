@@ -7,8 +7,10 @@ import { HttpserviceService } from '../../../services/httpservice.service';
   styleUrls: ['./typecomp.component.css']
 })
 export class TypecompComponent implements OnInit {
+
   selectedValue: number = -1;
   typeList: any = [];
+  
   constructor(private http: HttpserviceService) { }
 
   ngOnInit() {

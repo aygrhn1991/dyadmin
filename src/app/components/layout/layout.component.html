@@ -41,7 +41,7 @@
           <span title>
             <i class="anticon anticon-laptop"></i>统计数据</span>
           <ul>
-            <li nz-menu-item>统计数据</li>
+            <li nz-menu-item [routerLink]="['/layout/statistics']">统计数据</li>
           </ul>
         </li>
         <li nz-submenu>
@@ -49,6 +49,7 @@
             <i class="anticon anticon-user"></i>个人中心</span>
           <ul>
             <li nz-menu-item [routerLink]="['/layout/password']">修改密码</li>
+            <li nz-menu-item [routerLink]="['/layout/tips']">说明</li>
           </ul>
         </li>
       </ul>

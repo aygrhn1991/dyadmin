@@ -11,6 +11,7 @@ import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 
 import { CKEditorModule } from 'ng2-ckeditor';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 import { LoginComponent } from './components/login/login.component';
 import { LayoutComponent } from './components/layout/layout.component';
@@ -18,12 +19,14 @@ import { TypesComponent } from './components/layout/types/types.component';
 import { ArticlesComponent } from './components/layout/articles/articles.component';
 import { ArticleComponent } from './components/layout/article/article.component';
 import { QuestionsComponent } from './components/layout/questions/questions.component';
-
 import { TypecompComponent } from './components/common/typecomp/typecomp.component';
 import { DatecompComponent } from './components/common/datecomp/datecomp.component';
 import { UsersComponent } from './components/layout/users/users.component';
 import { TagsComponent } from './components/layout/tags/tags.component';
 import { PasswordComponent } from './components/layout/password/password.component';
+import { TipsComponent } from './components/layout/tips/tips.component';
+import { StatisticsComponent } from './components/layout/statistics/statistics.component';
+import { DaterangecompComponent } from './components/common/daterangecomp/daterangecomp.component';
 
 registerLocaleData(zh);
 
@@ -40,7 +43,10 @@ registerLocaleData(zh);
     QuestionsComponent,
     UsersComponent,
     TagsComponent,
-    PasswordComponent
+    PasswordComponent,
+    TipsComponent,
+    StatisticsComponent,
+    DaterangecompComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +55,8 @@ registerLocaleData(zh);
     FormsModule,
     HttpClientModule,
     NgZorroAntdModule,
-    CKEditorModule
+    CKEditorModule,
+    NgxEchartsModule
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent]
