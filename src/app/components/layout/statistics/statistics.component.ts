@@ -90,8 +90,8 @@ export class StatisticsComponent implements OnInit {
           name: '已回复数',
           type: 'line',
           areaStyle: {
-            normal:{
-              color:'#aed4c2'
+            normal: {
+              color: '#aed4c2'
             }
           },
           data: this.question_count_by_day_solved
