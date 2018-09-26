@@ -1,0 +1,5 @@
+npm install angular2-baidu-map
+npm install echarts
+npm install ngx-echarts
+npm install jquery
+npm install ng-zorro-antd
