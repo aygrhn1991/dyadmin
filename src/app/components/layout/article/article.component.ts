@@ -69,11 +69,11 @@ export class ArticleComponent implements OnInit {
     if (!isJPGorPNG) {
       this.message.error('请上传JPG或PNG格式图片!');
     }
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isLt2M) {
-      this.message.error('图片大小超过2MB!');
+    const isLt1M = file.size / 1024 / 1024 < 1;
+    if (!isLt1M) {
+      this.message.error('图片大小超过1MB!');
     }
-    return isJPGorPNG && isLt2M;
+    return isJPGorPNG && isLt1M;
   }
 
   handleChange(info: { file: UploadFile }): void {

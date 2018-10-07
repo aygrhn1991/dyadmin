@@ -6,6 +6,6 @@ import { Injectable } from '@angular/core';
 export class GlobalService {
 
   webServer: string = 'http://dy.ljwenyi.com/dy';
-  fileServer: string = 'http://dy.ljwenyi.com/dyfile';
+  fileServer: string = 'http://dy.ljwenyi.com/dyfile/upload';
   constructor() { }
 }
