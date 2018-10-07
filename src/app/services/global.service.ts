@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class GlobalService {
 
-  webServer: string = 'http://localhost:4208/dy';
-  fileServer: string = 'http://localhost:8000';
+  webServer: string = 'http://dy.ljwenyi.com/dy';
+  fileServer: string = 'http://dy.ljwenyi.com/dyfile';
   constructor() { }
 }
