@@ -151,47 +151,36 @@ export class StatisticsComponent implements OnInit {
         });
         this.login_scan_by_day.push(arr.length == 0 ? 0 : arr[0].t_scan);
       });
-
-      // this.question_count_by_day_option = {
-      //   title: {
-      //     text: '按日期统计提问数'
-      //   },
-      //   tooltip: {
-      //     trigger: 'axis'
-      //   },
-      //   legend: {
-      //     data: ['提问总数', '已回复数']
-      //   },
-      //   grid: {
-      //     left: '5%',
-      //     right: '5%',
-      //     bottom: '5%'
-      //   },
-      //   xAxis: [{
-      //     type: 'category',
-      //     boundaryGap: false,
-      //     data: this.dateStrList
-      //   }],
-      //   yAxis: [{
-      //     type: 'value'
-      //   }],
-      //   series: [{
-      //     name: '提问总数',
-      //     type: 'line',
-      //     areaStyle: {},
-      //     data: this.question_count_by_day_all
-      //   },
-      //   {
-      //     name: '已回复数',
-      //     type: 'line',
-      //     areaStyle: {
-      //       normal: {
-      //         color: '#aed4c2'
-      //       }
-      //     },
-      //     data: this.question_count_by_day_solved
-      //   }]
-      // };
+      this.login_scan_by_day_option = {
+        title: {
+          text: '按日期统计访问量'
+        },
+        tooltip: {
+          trigger: 'axis'
+        },
+        legend: {
+          data: ['访问量']
+        },
+        grid: {
+          left: '5%',
+          right: '5%',
+          bottom: '5%'
+        },
+        xAxis: [{
+          type: 'category',
+          boundaryGap: false,
+          data: this.dateStrList
+        }],
+        yAxis: [{
+          type: 'value'
+        }],
+        series: [{
+          name: '访问量',
+          type: 'line',
+          areaStyle: {},
+          data: this.login_scan_by_day
+        }]
+      };
     });
   }
   dateFormat(timestamp: number): string {
