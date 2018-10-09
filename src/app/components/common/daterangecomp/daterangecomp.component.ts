@@ -24,7 +24,7 @@ export class DaterangecompComponent implements OnInit {
   }
 
   dateCutter(date: Date): Date {
-    let d = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
+    let d = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();//此处使用‘/’格式化，因为使用‘-’格式化会出现8：00情况
     return new Date(d);
   }
 
