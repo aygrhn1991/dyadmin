@@ -16,9 +16,11 @@ export class StatisticsComponent implements OnInit {
   question_count_by_day_solved: any = [];
   question_count_by_tag: any = [];
   question_count_by_tag_legend: any = [];
+  login_scan_by_day: any = [];
 
   question_count_by_day_option;
   question_count_by_tag_option;
+  login_scan_by_day_option;
 
   @ViewChild('daterangeComp') daterangeComp: DaterangecompComponent;
 
@@ -32,6 +34,7 @@ export class StatisticsComponent implements OnInit {
     this.makeDate();
     this.question_count_by_day_fn();
     this.question_count_by_tag_fn();
+    this.login_scan_by_day_fn();
   }
 
   makeDate(): void {
@@ -107,8 +110,6 @@ export class StatisticsComponent implements OnInit {
         this.question_count_by_tag.push({ value: e.count, name: e.t_tag_name });
         this.question_count_by_tag_legend.push(e.t_tag_name);
       });
-      console.log(this.question_count_by_tag);
-      console.log(this.question_count_by_tag_legend);
       this.question_count_by_tag_option = {
         title: {
           text: '按关键词统计提问数'
@@ -139,6 +140,58 @@ export class StatisticsComponent implements OnInit {
           }
         ]
       };
+    });
+  }
+  login_scan_by_day_fn(): void {
+    this.login_scan_by_day = [];
+    this.http.get('/admin/login_scan_by_day/' + this.daterangeComp.dateRange[0].getTime() + '/' + this.daterangeComp.dateRange[1].getTime()).subscribe((data: any) => {
+      this.dateTimestampList.forEach((e) => {
+        let arr = data.filter(function (f) {
+          return f.t_time == e;
+        });
+        this.login_scan_by_day.push(arr.length == 0 ? 0 : arr[0].t_scan);
+      });
+
+      // this.question_count_by_day_option = {
+      //   title: {
+      //     text: '按日期统计提问数'
+      //   },
+      //   tooltip: {
+      //     trigger: 'axis'
+      //   },
+      //   legend: {
+      //     data: ['提问总数', '已回复数']
+      //   },
+      //   grid: {
+      //     left: '5%',
+      //     right: '5%',
+      //     bottom: '5%'
+      //   },
+      //   xAxis: [{
+      //     type: 'category',
+      //     boundaryGap: false,
+      //     data: this.dateStrList
+      //   }],
+      //   yAxis: [{
+      //     type: 'value'
+      //   }],
+      //   series: [{
+      //     name: '提问总数',
+      //     type: 'line',
+      //     areaStyle: {},
+      //     data: this.question_count_by_day_all
+      //   },
+      //   {
+      //     name: '已回复数',
+      //     type: 'line',
+      //     areaStyle: {
+      //       normal: {
+      //         color: '#aed4c2'
+      //       }
+      //     },
+      //     data: this.question_count_by_day_solved
+      //   }]
+      // };
     });
   }
   dateFormat(timestamp: number): string {
