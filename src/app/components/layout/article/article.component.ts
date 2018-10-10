@@ -19,7 +19,8 @@ export class ArticleComponent implements OnInit {
     t_author: null,
     t_time: null,
     t_cover: null,
-    t_content: null
+    t_content: null,
+    t_url:null
   };
   imgUrl: string;
   ckeConfig: any;

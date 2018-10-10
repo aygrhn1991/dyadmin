@@ -1,4 +1,5 @@
 <nz-alert nzType="warning" nzMessage="请将上传图片大小限制1M以内(封面图，文本编辑器上传图片)" nzShowIcon></nz-alert>
+<nz-alert nzType="warning" nzMessage="URL优先级高于手动添加的文章内容，如需显示自定义内容，请将URL清空" nzShowIcon></nz-alert>
 <form nz-form>
   <nz-form-item>
     <nz-form-label [nzSpan]="4">科室</nz-form-label>
@@ -16,6 +17,12 @@
     <nz-form-label [nzSpan]="4">作者</nz-form-label>
     <nz-form-control [nzSpan]="10">
       <input nz-input [(ngModel)]="data_model.t_author" name="data_model.t_author">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4">URL</nz-form-label>
+    <nz-form-control [nzSpan]="10">
+      <input nz-input [(ngModel)]="data_model.t_url" name="data_model.t_url">
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
