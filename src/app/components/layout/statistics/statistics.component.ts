@@ -22,12 +22,21 @@ export class StatisticsComponent implements OnInit {
   question_count_by_tag_option;
   login_scan_by_day_option;
 
+  article_scan;
+  article_search;
+  question_scan;
+
   @ViewChild('daterangeComp') daterangeComp: DaterangecompComponent;
 
   constructor(private http: HttpserviceService) { }
 
   ngOnInit() {
     this.searchData();
+    this.http.get('/admin/article_question_sort').subscribe((data: any) => {
+      this.article_scan = data.article_scan;
+      this.article_search = data.article_search;
+      this.question_scan = data.question_scan;
+    });
   }
 
   searchData(): void {

@@ -10,6 +10,7 @@
         </nz-form-control>
     </nz-form-item>
 </form>
+<br><br>
 <div nz-row>
     <div nz-col nzSpan="16">
         <div echarts [options]="question_count_by_day_option"></div>
@@ -17,7 +18,64 @@
     <div nz-col nzSpan="8">
         <div echarts [options]="question_count_by_tag_option"></div>
     </div>
+</div>
+<br><br>
+<div nz-row>
     <div nz-col nzSpan="24">
         <div echarts [options]="login_scan_by_day_option"></div>
+    </div>
+</div>
+<br><br>
+<div nz-row>
+    <div nz-col nzSpan="8">
+        <nz-table #article_scan_table nzSize="small" [nzData]="article_scan" [nzFrontPagination]="false" [nzShowPagination]="false"
+            nzTitle="文章访问top10">
+            <thead>
+                <tr>
+                    <th>文章</th>
+                    <th>访问量</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of article_scan_table.data">
+                    <td>{{data.t_title}}</td>
+                    <td>{{data.t_scan_origin}}</td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+    <div nz-col nzSpan="8">
+        <nz-table #article_search_table nzSize="small" [nzData]="article_search" [nzFrontPagination]="false"
+            [nzShowPagination]="false" nzTitle="文章搜索top10">
+            <thead>
+                <tr>
+                    <th>文章</th>
+                    <th>搜索量</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of article_search_table.data">
+                    <td>{{data.t_title}}</td>
+                    <td>{{data.t_search}}</td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+    <div nz-col nzSpan="8">
+        <nz-table #question_scan_table nzSize="small" [nzData]="question_scan" [nzFrontPagination]="false" [nzShowPagination]="false"
+            nzTitle="提问浏览top10">
+            <thead>
+                <tr>
+                    <th>提问</th>
+                    <th>访问量</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of question_scan_table.data">
+                    <td>{{data.t_title}}</td>
+                    <td>{{data.t_scan_origin}}</td>
+                </tr>
+            </tbody>
+        </nz-table>
     </div>
 </div>
