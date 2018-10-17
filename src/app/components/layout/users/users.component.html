@@ -40,10 +40,10 @@
 </ng-template>
 <nz-modal [(nzVisible)]="isVisible_question" nzTitle="提问记录" (nzOnCancel)="isVisible_question=false" (nzOnOk)="isVisible_question=false">
   <div nz-row *ngFor="let data of questionList;let i=index">
-    <div nz-col nzSpan="1" style="line-height: 30px;font-weight: bold;">
+    <div nz-col nzSpan="2" style="line-height: 30px;font-weight: bold;">
       {{i+1}}.
     </div>
-    <div nz-col nzSpan="15" style="padding: 5px 10px;font-weight: bold;">
+    <div nz-col nzSpan="14" style="padding: 5px 10px;font-weight: bold;">
       {{data.t_title}}
     </div>
     <div nz-col nzSpan="8" style="line-height: 30px;">
