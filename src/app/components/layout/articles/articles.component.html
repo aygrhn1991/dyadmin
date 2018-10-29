@@ -1,6 +1,14 @@
-<nz-alert nzType="warning" nzMessage="排序规则：置顶>排序>浏览量" nzShowIcon></nz-alert>
+<nz-alert nzType="warning" nzMessage="浏览模式：按时间倒序排序" nzShowIcon></nz-alert>
+<nz-alert nzType="warning" nzMessage="排序模式：排序规则->置顶>排序>浏览量" nzShowIcon></nz-alert>
 <form nz-form>
   <nz-form-item>
+    <nz-form-label [nzSpan]="2">模式</nz-form-label>
+    <nz-form-control [nzSpan]="4">
+      <nz-select [(ngModel)]="mode" name="mode">
+        <nz-option nzValue="0" nzLabel="浏览模式"></nz-option>
+        <nz-option nzValue="1" nzLabel="排序模式"></nz-option>
+      </nz-select>
+    </nz-form-control>
     <nz-form-label [nzSpan]="2">科室</nz-form-label>
     <nz-form-control [nzSpan]="4">
       <app-typecomp #typeComp></app-typecomp>

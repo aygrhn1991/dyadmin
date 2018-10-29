@@ -1,6 +1,14 @@
-<nz-alert nzType="warning" nzMessage="排序规则：置顶>排序>浏览量" nzShowIcon></nz-alert>
+<nz-alert nzType="warning" nzMessage="浏览模式：按时间倒序排序" nzShowIcon></nz-alert>
+<nz-alert nzType="warning" nzMessage="排序模式：排序规则->置顶>排序>浏览量" nzShowIcon></nz-alert>
 <form nz-form>
   <nz-form-item>
+    <nz-form-label [nzSpan]="2">模式</nz-form-label>
+    <nz-form-control [nzSpan]="4">
+      <nz-select [(ngModel)]="mode" name="mode">
+        <nz-option nzValue="0" nzLabel="浏览模式"></nz-option>
+        <nz-option nzValue="1" nzLabel="排序模式"></nz-option>
+      </nz-select>
+    </nz-form-control>
     <nz-form-label [nzSpan]="2">状态</nz-form-label>
     <nz-form-control [nzSpan]="4">
       <nz-select [(ngModel)]="state" nzAllowClear name="state">
@@ -20,7 +28,7 @@
 </form>
 <nz-table #typeTable nzShowSizeChanger nzSize="small" nzFrontPagination="false" [nzData]="dataSet" [nzLoading]="loading"
   [nzTotal]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" (nzPageIndexChange)="searchData()" (nzPageSizeChange)="searchData(true)"
-  [nzShowTotal]="rangeTemplate" [nzScroll]="{ x:'1500px' }">
+  [nzShowTotal]="rangeTemplate" [nzScroll]="{ x:'1800px' }">
   <thead>
     <tr>
       <th nzWidth="50px" nzLeft="0px">id</th>
@@ -71,6 +79,7 @@
         <button nz-button nzSize="small" nzType="danger" (click)="delete(data)">删除</button>
         <button nz-button nzSize="small" nzType="default" (click)="showModal_answer(data)">查看/回复</button>
         <button nz-button nzSize="small" nzType="primary" *ngIf="data.t_user_id!=0" (click)="showModal_user(data)">用户信息</button>
+        <button nz-button nzSize="small" nzType="primary" *ngIf="data.t_user_id!=0" (click)="showModal_question(data)">提问记录</button>
       </td>
     </tr>
   </tbody>
@@ -163,5 +172,18 @@
   <div nz-row>
     <div nz-col nzSpan="8" class="dy-user-label">注册时间：</div>
     <div nz-col nzSpan="16" class="dy-user-info">{{temp_user.t_time|date:'yyyy-MM-dd HH:mm:ss'}}</div>
+  </div>
+</nz-modal>
+<nz-modal [(nzVisible)]="isVisible_question" nzTitle="提问记录" (nzOnCancel)="isVisible_question=false" (nzOnOk)="isVisible_question=false">
+  <div nz-row *ngFor="let data of questionList;let i=index">
+    <div nz-col nzSpan="2" style="line-height: 30px;font-weight: bold;">
+      {{i+1}}.
+    </div>
+    <div nz-col nzSpan="14" style="padding: 5px 10px;font-weight: bold;">
+      {{data.t_title}}
+    </div>
+    <div nz-col nzSpan="8" style="line-height: 30px;">
+      {{data.t_time|date:'yyyy-MM-dd HH:mm:ss'}}
+    </div>
   </div>
 </nz-modal>

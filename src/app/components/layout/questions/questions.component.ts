@@ -13,6 +13,7 @@ export class QuestionsComponent implements OnInit {
   pageIndex: number = 1;
   pageSize: number = 10;
   total: number = 1;
+  mode: string = '0';
   state: number = -1;
   keyword = '';
   dataSet = [];
@@ -46,6 +47,7 @@ export class QuestionsComponent implements OnInit {
     this.http.get('/admin/queryquestions/' +
       this.pageIndex + '/' +
       this.pageSize + '/' +
+      this.mode + '/' +
       (this.state == null ? -1 : this.state) + '/' +
       this.keyword).subscribe((data: any) => {
         this.loading = false;
@@ -55,7 +57,7 @@ export class QuestionsComponent implements OnInit {
   reset(): void {
     this.state = null;
     this.keyword = '';
-    this.searchData();
+    this.searchData(true);
   }
   showModal_add(): void {
     this.isVisible_add = true;
@@ -211,6 +213,13 @@ export class QuestionsComponent implements OnInit {
     });
   }
 
-
+  isVisible_question = false;
+  questionList: any = [];
+  showModal_question(data): void {
+    this.isVisible_question = true;
+    this.http.get('/admin/queryallquestions/' + data.t_user_id).subscribe((data: any) => {
+      this.questionList = data;
+    });
+  }
 
 }

@@ -15,6 +15,7 @@ export class ArticlesComponent implements OnInit {
   pageIndex: number = 1;
   pageSize: number = 10;
   total: number = 1;
+  mode: string = '0';
   keyword = '';
   dataSet = [];
   loading = true;
@@ -44,6 +45,7 @@ export class ArticlesComponent implements OnInit {
     this.http.get('/admin/queryarticles/' +
       this.pageIndex + '/' +
       this.pageSize + '/' +
+      this.mode + '/' +
       (this.typeComp.selectedValue == null ? -1 : this.typeComp.selectedValue) + '/' +
       this.keyword).subscribe((data: any) => {
         this.loading = false;
@@ -53,7 +55,7 @@ export class ArticlesComponent implements OnInit {
   reset(): void {
     this.typeComp.selectedValue = null;
     this.keyword = '';
-    this.searchData();
+    this.searchData(true);
   }
   delete(e): void {
     this.modalService.confirm({
