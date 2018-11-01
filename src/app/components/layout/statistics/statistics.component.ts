@@ -25,6 +25,7 @@ export class StatisticsComponent implements OnInit {
   article_scan;
   article_search;
   question_scan;
+  question_search;
 
   @ViewChild('daterangeComp') daterangeComp: DaterangecompComponent;
 
@@ -36,6 +37,7 @@ export class StatisticsComponent implements OnInit {
       this.article_scan = data.article_scan;
       this.article_search = data.article_search;
       this.question_scan = data.question_scan;
+      this.question_search = data.question_search;
     });
   }
 
